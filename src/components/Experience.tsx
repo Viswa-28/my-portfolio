@@ -15,6 +15,12 @@ const experiences: Experience[] = [
     dates: '[ start–end ]',
     summary: 'Built and maintained PHP web applications for business clients',
   },
+  {
+    role: 'Freelancer',
+    company: 'Freelance',
+    dates: 'Jan 2025 – Oct 2025',
+    summary: 'Built the Tev HR Solutions website as a freelance project.',
+  },
 ]
 
 function Experience() {
