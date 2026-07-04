@@ -20,7 +20,7 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="relative scroll-mt-24 overflow-hidden bg-white py-24 text-center sm:py-32"
+      className="relative scroll-mt-24 overflow-hidden py-28 text-center sm:py-40"
     >
       {/* Quiet green graph-paper grid + a soft accent glow. CSS only. */}
       <div
@@ -39,22 +39,22 @@ function Hero() {
           by="char"
           text="Viswa"
           delay={0.1}
-          className="font-heading text-5xl font-bold tracking-tight text-ink sm:text-6xl"
+          className="font-heading text-hero font-bold tracking-tight text-ink"
         />
         <SplitText
           as="p"
           by="word"
           text="Business & Data Analyst"
           delay={0.5}
-          className="mt-4 text-lg font-medium text-accent sm:text-xl"
+          className="mt-4 font-heading text-hero-sub font-medium text-accent sm:mt-6"
         />
-        <motion.p {...rise(0.9)} className="mt-2 text-base text-muted">
+        <motion.p {...rise(0.9)} className="mt-3 text-base text-muted sm:mt-4">
           Developer background · SQL · Power BI
         </motion.p>
 
         <motion.div
           {...rise(1.05)}
-          className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          className="mt-10 flex flex-col items-center justify-center gap-3 sm:mt-14 sm:flex-row"
         >
           <a
             href="#projects"

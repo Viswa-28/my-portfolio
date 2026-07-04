@@ -25,11 +25,11 @@ const directLinks = [
 
 function Contact() {
   return (
-    <section id="contact" className="scroll-mt-24 bg-accent-soft py-16 sm:py-20">
+    <section id="contact" className="scroll-mt-24 py-20 sm:py-32">
       <div className="mx-auto max-w-3xl px-6">
         <Reveal>
           <SectionHeading>Contact</SectionHeading>
-          <p className="mt-4 max-w-lg text-base text-body">
+          <p className="mt-6 max-w-lg text-lg text-body sm:text-xl">
             Have a role or project in mind? Send a message below, or connect
             directly.
           </p>

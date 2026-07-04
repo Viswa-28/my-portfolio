@@ -19,24 +19,21 @@ const experiences: Experience[] = [
 
 function Experience() {
   return (
-    <section
-      id="experience"
-      className="scroll-mt-24 bg-white py-16 sm:py-20"
-    >
+    <section id="experience" className="scroll-mt-24 py-20 sm:py-32">
       <div className="mx-auto max-w-3xl px-6">
         <Reveal>
           <SectionHeading>Experience</SectionHeading>
-          <div className="mt-6 space-y-6">
+          <div className="mt-10 space-y-12">
             {experiences.map((item) => (
-              <article
-                key={`${item.role}-${item.company}`}
-                className="border-l-2 border-line pl-4"
-              >
-                <h3 className="font-heading text-lg font-bold text-ink">
-                  {item.role} · {item.company}
+              <article key={`${item.role}-${item.company}`}>
+                <p className="font-heading text-xs font-semibold tracking-[0.2em] text-muted uppercase">
+                  {item.dates}
+                </p>
+                <h3 className="mt-2 font-heading text-role font-bold text-ink">
+                  {item.role} <span className="text-accent">·</span>{' '}
+                  {item.company}
                 </h3>
-                <p className="mt-0.5 text-sm text-muted">{item.dates}</p>
-                <p className="mt-2 text-body">{item.summary}</p>
+                <p className="mt-3 max-w-xl text-body">{item.summary}</p>
               </article>
             ))}
           </div>

@@ -17,9 +17,22 @@
   --color-line: #e4e8e6; /* borders / dividers */
   --color-accent: #1f6f54; /* links, buttons, focus (4.9:1 on white) */
   --color-accent-hover: #185a44; /* accent, pressed/hover */
-  --color-accent-soft: #e7f1ec; /* soft tint fills / pills */
 
   --radius-card: 0.625rem; /* 10px — the one border radius */
+
+  /* Fluid, typography-led scale. Every large size is vw+vh based so it
+     scales with both screen width and height, and is clamped so it never
+     forces horizontal overflow on narrow phones. */
+  --text-hero: clamp(3.5rem, 8vw + 5vh, 11rem); /* Hero name — dominates */
+  --text-hero--line-height: 0.95;
+  --text-hero-sub: clamp(1.5rem, 3vw + 2vh, 3rem); /* Hero tagline */
+  --text-hero-sub--line-height: 1.15;
+  --text-huge: clamp(2rem, 5vw + 2vh, 4.5rem); /* Project titles */
+  --text-huge--line-height: 1.05;
+  --text-lede: clamp(1.75rem, 4vw + 1.5vh, 3.25rem); /* About's pulled statement */
+  --text-lede--line-height: 1.15;
+  --text-role: clamp(1.5rem, 3vw + 1.5vh, 2.5rem); /* Experience role/company */
+  --text-role--line-height: 1.15;
 }
 
 @layer base {
