@@ -67,91 +67,94 @@ function Navbar() {
   const solid = scrolled || open
 
   return (
-    <header
-      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
-        solid
-          ? 'border-line bg-white/90 backdrop-blur-md'
-          : 'border-transparent bg-transparent'
-      }`}
-    >
-      <nav className="relative z-10 mx-auto flex max-w-3xl items-center justify-between px-6 py-3">
-        <a
-          href="#hero"
-          onClick={() => setOpen(false)}
-          className="font-heading text-lg font-bold tracking-tight text-ink"
-        >
-          Viswa<span className="text-accent">.</span>
-        </a>
-
-        {/* Desktop: inline link row with a sliding active-section underline */}
-        <ul className="hidden gap-x-8 text-xs font-semibold tracking-[0.15em] text-muted uppercase md:flex">
-          {links.map((link) => {
-            const isActive = activeId === link.href.slice(1)
-            return (
-              <li key={link.href} className="relative">
-                <a
-                  href={link.href}
-                  className={`inline-flex min-h-11 items-center pb-1 transition-colors ${
-                    isActive ? 'text-ink' : 'hover:text-accent'
-                  }`}
-                >
-                  {link.label}
-                </a>
-                {isActive && (
-                  <motion.span
-                    layoutId={reduce ? undefined : 'nav-underline'}
-                    className="absolute right-0 bottom-0 left-0 h-0.5 bg-accent"
-                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                  />
-                )}
-              </li>
-            )
-          })}
-        </ul>
-
-        {/* Mobile: hamburger toggle (44x44 tap target, inline SVG — no icon lib) */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          className="inline-flex h-11 w-11 items-center justify-center text-ink md:hidden"
-        >
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            aria-hidden="true"
+    <>
+      <header
+        className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
+          solid
+            ? 'border-line bg-white/90 backdrop-blur-md'
+            : 'border-transparent bg-transparent'
+        }`}
+      >
+        <nav className="relative z-10 mx-auto flex max-w-3xl items-center justify-between px-6 py-3">
+          <a
+            href="#hero"
+            onClick={() => setOpen(false)}
+            className="font-heading text-lg font-bold tracking-tight text-ink"
           >
-            {open ? (
-              <>
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </>
-            ) : (
-              <>
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </>
-            )}
-          </svg>
-        </button>
-      </nav>
+            Viswa<span className="text-accent">.</span>
+          </a>
 
-      {/* Mobile: full-screen bold-type menu. The backdrop is opaque from the
-          first frame (no opacity fade on the container) so the page never
-          bleeds through; only the links animate in. Sits below the logo/X
-          (z-0 vs the nav's z-10) so they stay visible and tappable. */}
+          {/* Desktop: inline link row with a sliding active-section underline */}
+          <ul className="hidden gap-x-8 text-xs font-semibold tracking-[0.15em] text-muted uppercase md:flex">
+            {links.map((link) => {
+              const isActive = activeId === link.href.slice(1)
+              return (
+                <li key={link.href} className="relative">
+                  <a
+                    href={link.href}
+                    className={`inline-flex min-h-11 items-center pb-1 transition-colors ${
+                      isActive ? 'text-ink' : 'hover:text-accent'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                  {isActive && (
+                    <motion.span
+                      layoutId={reduce ? undefined : 'nav-underline'}
+                      className="absolute right-0 bottom-0 left-0 h-0.5 bg-accent"
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+
+          {/* Mobile: hamburger / close toggle (44x44 tap target, inline SVG) */}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            className="inline-flex h-11 w-11 items-center justify-center text-ink md:hidden"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              {open ? (
+                <>
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </>
+              ) : (
+                <>
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <line x1="3" y1="12" x2="21" y2="12" />
+                  <line x1="3" y1="18" x2="21" y2="18" />
+                </>
+              )}
+            </svg>
+          </button>
+        </nav>
+      </header>
+
+      {/* Full-screen mobile menu — rendered OUTSIDE <header> on purpose: the
+          header's backdrop-blur is a containing block for fixed elements, so a
+          menu nested inside it would collapse to the header's height instead of
+          covering the viewport. As a sibling, `fixed inset-0` fills the screen.
+          z-40 sits just under the header's z-50 so the logo + X stay on top. */}
       {open && (
         <div
           id="mobile-menu"
-          className="fixed inset-0 z-0 flex flex-col justify-center bg-white px-8 md:hidden"
+          className="fixed inset-0 z-40 flex flex-col justify-center bg-white px-8 md:hidden"
         >
           <ul className="flex flex-col gap-1">
             {links.map((link, i) => (
@@ -180,7 +183,7 @@ function Navbar() {
           </ul>
         </div>
       )}
-    </header>
+    </>
   )
 }
 
