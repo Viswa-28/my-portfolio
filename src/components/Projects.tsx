@@ -1,8 +1,19 @@
 import { motion } from 'motion/react'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
+import SplitText from './SplitText'
+import Magnet from './Magnet'
+import CountUp from './CountUp'
 import { prefersReducedMotion } from '../lib/reducedMotion'
 import { staggerContainer, staggerItem } from '../lib/motion'
+
+// Honest, verifiable figures — 4 project cards below, 2 of them live in
+// production (Workdu, Tev HR Solutions), 11 tools in the Skills marquee.
+const stats: { end: number; suffix?: string; label: string }[] = [
+  { end: 4, label: 'Projects shipped' },
+  { end: 2, label: 'Live in production' },
+  { end: 10, suffix: '+', label: 'Tools & tech' },
+]
 
 type Project = {
   title: string
@@ -64,13 +75,33 @@ const reduce = prefersReducedMotion
 
 function Projects() {
   return (
-    <section id="projects" className="scroll-mt-24 py-20 sm:py-32">
+    <section
+      id="projects"
+      className="scroll-mt-24 overflow-hidden py-20 sm:py-32"
+    >
       <div className="mx-auto max-w-3xl px-6">
         <Reveal>
           <SectionHeading>Projects</SectionHeading>
         </Reveal>
+
+        {/* Animated stat counters — tick up on scroll into view. */}
+        <Reveal>
+          <ul className="mt-8 grid grid-cols-3 gap-4 border-y border-line py-6 sm:mt-10">
+            {stats.map((stat) => (
+              <li key={stat.label}>
+                <span className="block font-heading text-4xl font-bold text-ink sm:text-5xl">
+                  <CountUp end={stat.end} suffix={stat.suffix ?? ''} />
+                </span>
+                <span className="mt-1 block text-xs font-semibold tracking-[0.15em] text-muted uppercase">
+                  {stat.label}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+
         <motion.div
-          className="mt-10 space-y-16 sm:mt-16 sm:space-y-24"
+          className="mt-12 space-y-16 sm:mt-16 sm:space-y-24"
           variants={reduce ? undefined : staggerContainer}
           initial={reduce ? undefined : 'hidden'}
           whileInView={reduce ? undefined : 'show'}
@@ -84,13 +115,15 @@ function Projects() {
                 variants={reduce ? undefined : staggerItem}
                 className="group"
               >
-                <h3
-                  className={`font-heading text-huge font-bold tracking-tight text-ink transition-colors group-hover:text-accent ${
-                    reversed ? 'sm:text-right' : ''
-                  }`}
-                >
-                  {project.title}
-                </h3>
+                <Magnet className={reversed ? 'sm:text-right' : ''}>
+                  <SplitText
+                    as="h3"
+                    by="word"
+                    trigger="scroll"
+                    text={project.title}
+                    className="font-heading text-huge font-bold tracking-tight text-ink transition-colors group-hover:text-accent"
+                  />
+                </Magnet>
                 <ul
                   className={`mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs font-semibold tracking-[0.15em] text-muted uppercase ${
                     reversed ? 'sm:justify-end' : ''

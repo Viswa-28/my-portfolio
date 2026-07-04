@@ -56,13 +56,8 @@
   }
 }
 
-/* Hero graph-paper grid — a quiet, data-oriented texture in the accent,
-   masked so it fades out behind the text. Static (CSS only). */
-.hero-grid {
-  background-image:
-    linear-gradient(to right, rgba(31, 111, 84, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(31, 111, 84, 0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
+/* Radial fade so hero background layers dissolve behind the centred text. */
+.hero-mask {
   -webkit-mask-image: radial-gradient(
     ellipse 75% 65% at 50% 38%,
     #000 30%,
@@ -73,6 +68,16 @@
     #000 30%,
     transparent 78%
   );
+}
+
+/* Hero graph-paper grid — a quiet, data-oriented texture in the accent,
+   masked so it fades out behind the text. Static (CSS only); used as the
+   fallback on mobile / reduced-motion where the interactive canvas is off. */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(31, 111, 84, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(31, 111, 84, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
 /* Soft accent glow that gently breathes (CSS keyframes only — not scroll

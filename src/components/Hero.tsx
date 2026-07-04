@@ -1,9 +1,12 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import SplitText from './SplitText'
+import DotGrid from './DotGrid'
 import { prefersReducedMotion } from '../lib/reducedMotion'
 import { EASE } from '../lib/motion'
 
 const reduce = prefersReducedMotion
+const DESKTOP_MIN_WIDTH = 768
 
 // Block-level fade+rise, sequenced after the split-text reveals. Empty props
 // for reduced-motion users so content shows immediately.
@@ -17,17 +20,33 @@ const rise = (delay: number) =>
       }
 
 function Hero() {
+  // Interactive canvas grid only on desktop + when motion is allowed; mobile
+  // and reduced-motion get the static CSS grid instead.
+  const [interactive, setInteractive] = useState(false)
+
+  useEffect(() => {
+    if (reduce) return
+    const check = () => setInteractive(window.innerWidth >= DESKTOP_MIN_WIDTH)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   return (
     <section
       id="hero"
       className="relative scroll-mt-24 overflow-hidden py-28 text-center sm:py-40"
     >
-      {/* Quiet green graph-paper grid + a soft accent glow. CSS only. */}
+      {/* Interactive dot grid (desktop) or static grid (fallback) + glow. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="hero-grid absolute inset-0" />
+        {interactive ? (
+          <DotGrid className="hero-mask absolute inset-0 h-full w-full" />
+        ) : (
+          <div className="hero-grid hero-mask absolute inset-0" />
+        )}
         <div className="absolute top-14 left-1/2 -translate-x-1/2 sm:top-16">
           <div className="hero-glow h-56 w-56 rounded-full bg-accent/15 blur-3xl sm:h-72 sm:w-72" />
         </div>
