@@ -23,7 +23,7 @@ const projects: Project[] = [
     result:
       'A live platform currently listing active roles from verified employers, including established companies like TCS, Infosys, and Wipro.',
     link: 'https://workdu.com',
-    tags: ['PHP', 'MySQL', 'JavaScript'],
+    tags: ['PHP', 'Laravel', 'MySQL', 'JavaScript'],
   },
   {
     title: 'Tev HR Solutions',

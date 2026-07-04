@@ -9,8 +9,11 @@ type Errors = { name?: string; email?: string; message?: string }
 
 // Text-base (16px) inputs avoid iOS zoom-on-focus and meet the readability
 // floor; min-h-11 keeps the tap target at 44px. Focus ring is the global rule.
+// border-muted (not border-line) — border-line is ~1.2:1 against white, which
+// fails WCAG 1.4.11's 3:1 minimum for UI component boundaries and renders as
+// an invisible outline; border-muted clears 4.6:1.
 const fieldClass =
-  'w-full rounded-card border border-line bg-white px-3.5 py-2.5 text-base text-ink placeholder:text-muted transition-colors focus:border-accent'
+  'w-full rounded-card border border-muted bg-white px-3.5 py-2.5 text-base text-ink placeholder:text-muted transition-colors focus:border-accent'
 
 function validate(data: FormData): Errors {
   const errors: Errors = {}

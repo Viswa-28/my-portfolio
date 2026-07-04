@@ -12,7 +12,7 @@ const experiences: Experience[] = [
   {
     role: 'PHP Developer',
     company: 'Laabam One Business Solution',
-    dates: '[ start–end ]',
+    dates: 'Nov 2025 – Present',
     summary: 'Built and maintained PHP web applications for business clients',
   },
   {

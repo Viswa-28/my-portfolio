@@ -64,7 +64,7 @@ function Hero() {
           </a>
           <a
             href="#contact"
-            className="inline-flex min-h-11 w-full items-center justify-center rounded-card border border-line px-5 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent sm:w-auto"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-card border border-muted px-5 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent sm:w-auto"
           >
             Get in touch
           </a>
