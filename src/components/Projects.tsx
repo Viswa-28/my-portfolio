@@ -7,11 +7,10 @@ import CountUp from './CountUp'
 import { prefersReducedMotion } from '../lib/reducedMotion'
 import { staggerContainer, staggerItem } from '../lib/motion'
 
-// Honest, verifiable figures — 4 project cards below, 2 of them live in
-// production (Workdu, Tev HR Solutions), 11 tools in the Skills marquee.
+// Honest, verifiable figures — 2 live projects (Workdu, Tev HR Solutions)
+// and 11 tools in the Skills marquee.
 const stats: { end: number; suffix?: string; label: string }[] = [
-  { end: 4, label: 'Projects shipped' },
-  { end: 2, label: 'Live in production' },
+  { end: 2, label: 'Live projects' },
   { end: 10, suffix: '+', label: 'Tools & tech' },
 ]
 
@@ -47,28 +46,6 @@ const projects: Project[] = [
     link: 'https://tevhrsolutions.in',
     tags: ['PHP', 'MySQL', 'JavaScript'],
   },
-  {
-    title: 'Employee Task Management System',
-    problem:
-      'Small teams needed a simple way to assign tasks and track working hours without adopting a heavyweight HR platform.',
-    whatIDid:
-      'Built a task management system with separate admin and employee dashboards — admins assign tasks and monitor hours, while employees check in, check out, and log attendance, backed by role-based authentication.',
-    result:
-      'A self-built PHP/MySQL project practicing role-based access control and attendance tracking end-to-end.',
-    link: 'https://github.com/Viswa-28/employee-task',
-    tags: ['PHP', 'MySQL', 'JavaScript'],
-  },
-  {
-    title: 'PHP E-Commerce',
-    problem:
-      'Practicing the core mechanics of an online store — product browsing, cart management, and checkout — without relying on a pre-built e-commerce platform.',
-    whatIDid:
-      'Built a PHP e-commerce application from scratch, including an admin panel for managing products, a shopping cart, and a checkout flow, with customer-facing login and contact forms.',
-    result:
-      'A functioning e-commerce demo covering the full purchase flow from product browsing to checkout.',
-    link: 'https://github.com/Viswa-28/php-ecommerce',
-    tags: ['PHP', 'MySQL', 'HTML/CSS'],
-  },
 ]
 
 const reduce = prefersReducedMotion
@@ -86,7 +63,7 @@ function Projects() {
 
         {/* Animated stat counters — tick up on scroll into view. */}
         <Reveal>
-          <ul className="mt-8 grid grid-cols-3 gap-4 border-y border-line py-6 sm:mt-10">
+          <ul className="mt-8 grid grid-cols-2 gap-4 border-y border-line py-6 sm:mt-10">
             {stats.map((stat) => (
               <li key={stat.label}>
                 <span className="block font-heading text-4xl font-bold text-ink sm:text-5xl">
