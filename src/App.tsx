@@ -37,7 +37,7 @@ function App() {
   return (
     <div className="min-h-screen bg-white text-body">
       <Navbar />
-      <main className="mx-auto max-w-3xl px-6">
+      <main>
         <Hero />
         <About />
         <Skills />
@@ -45,7 +45,7 @@ function App() {
         <Experience />
         <Contact />
       </main>
-      <footer className="border-t border-line py-8 text-center text-sm text-muted">
+      <footer className="border-t border-line px-6 py-8 text-center text-sm text-muted">
         © 2026 Viswa · Business &amp; Data Analyst
       </footer>
     </div>

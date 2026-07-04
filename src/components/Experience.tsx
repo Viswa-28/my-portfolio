@@ -21,25 +21,27 @@ function Experience() {
   return (
     <section
       id="experience"
-      className="scroll-mt-24 border-t border-line py-16 sm:py-20"
+      className="scroll-mt-24 bg-white py-16 sm:py-20"
     >
-      <Reveal>
-        <SectionHeading>Experience</SectionHeading>
-        <div className="mt-6 space-y-6">
-          {experiences.map((item) => (
-            <article
-              key={`${item.role}-${item.company}`}
-              className="border-l-2 border-line pl-4"
-            >
-              <h3 className="font-heading text-lg font-bold text-ink">
-                {item.role} · {item.company}
-              </h3>
-              <p className="mt-0.5 text-sm text-muted">{item.dates}</p>
-              <p className="mt-2 text-body">{item.summary}</p>
-            </article>
-          ))}
-        </div>
-      </Reveal>
+      <div className="mx-auto max-w-3xl px-6">
+        <Reveal>
+          <SectionHeading>Experience</SectionHeading>
+          <div className="mt-6 space-y-6">
+            {experiences.map((item) => (
+              <article
+                key={`${item.role}-${item.company}`}
+                className="border-l-2 border-line pl-4"
+              >
+                <h3 className="font-heading text-lg font-bold text-ink">
+                  {item.role} · {item.company}
+                </h3>
+                <p className="mt-0.5 text-sm text-muted">{item.dates}</p>
+                <p className="mt-2 text-body">{item.summary}</p>
+              </article>
+            ))}
+          </div>
+        </Reveal>
+      </div>
     </section>
   )
 }

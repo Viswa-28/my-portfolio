@@ -18,7 +18,6 @@
   --color-accent: #1f6f54; /* links, buttons, focus (4.9:1 on white) */
   --color-accent-hover: #185a44; /* accent, pressed/hover */
   --color-accent-soft: #e7f1ec; /* soft tint fills / pills */
-  --color-accent-light: #7fc9a6; /* same hue, lighter — accent text on dark */
 
   --radius-card: 0.625rem; /* 10px — the one border radius */
 }
@@ -44,24 +43,22 @@
   }
 }
 
-/* Hero dot field — adapted from Aceternity UI "Dot Background", recoloured
-   to the accent and masked so it fades out behind the text. Static (CSS). */
-.hero-dots {
-  background-image: radial-gradient(
-    circle,
-    rgba(31, 111, 84, 0.16) 1px,
-    transparent 1.5px
-  );
-  background-size: 20px 20px;
+/* Hero graph-paper grid — a quiet, data-oriented texture in the accent,
+   masked so it fades out behind the text. Static (CSS only). */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(31, 111, 84, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(31, 111, 84, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
   -webkit-mask-image: radial-gradient(
     ellipse 75% 65% at 50% 38%,
-    #000 35%,
-    transparent 80%
+    #000 30%,
+    transparent 78%
   );
   mask-image: radial-gradient(
     ellipse 75% 65% at 50% 38%,
-    #000 35%,
-    transparent 80%
+    #000 30%,
+    transparent 78%
   );
 }
 
