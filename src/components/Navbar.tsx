@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion } from 'motion/react'
 import { prefersReducedMotion } from '../lib/reducedMotion'
 import { EASE } from '../lib/motion'
 
@@ -144,45 +144,42 @@ function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile: full-screen bold-type menu, matching the rest of the site */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-menu"
-            initial={reduce ? undefined : { opacity: 0 }}
-            animate={reduce ? undefined : { opacity: 1 }}
-            exit={reduce ? undefined : { opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-0 flex flex-col justify-center bg-white px-8 md:hidden"
-          >
-            <ul className="flex flex-col gap-1">
-              {links.map((link, i) => (
-                <motion.li
-                  key={link.href}
-                  initial={reduce ? undefined : { opacity: 0, y: 16 }}
-                  animate={reduce ? undefined : { opacity: 1, y: 0 }}
-                  transition={
-                    reduce
-                      ? undefined
-                      : { delay: 0.05 * i, duration: 0.35, ease: EASE }
-                  }
+      {/* Mobile: full-screen bold-type menu. The backdrop is opaque from the
+          first frame (no opacity fade on the container) so the page never
+          bleeds through; only the links animate in. Sits below the logo/X
+          (z-0 vs the nav's z-10) so they stay visible and tappable. */}
+      {open && (
+        <div
+          id="mobile-menu"
+          className="fixed inset-0 z-0 flex flex-col justify-center bg-white px-8 md:hidden"
+        >
+          <ul className="flex flex-col gap-1">
+            {links.map((link, i) => (
+              <motion.li
+                key={link.href}
+                initial={reduce ? undefined : { opacity: 0, y: 16 }}
+                animate={reduce ? undefined : { opacity: 1, y: 0 }}
+                transition={
+                  reduce
+                    ? undefined
+                    : { delay: 0.04 * i, duration: 0.3, ease: EASE }
+                }
+              >
+                <a
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-4 py-2 font-heading text-4xl font-bold text-ink transition-colors hover:text-accent"
                 >
-                  <a
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="flex items-center gap-4 py-2 font-heading text-4xl font-bold text-ink transition-colors hover:text-accent"
-                  >
-                    <span className="text-base font-medium text-accent">
-                      0{i + 1}
-                    </span>
-                    {link.label}
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  <span className="text-base font-medium text-accent">
+                    0{i + 1}
+                  </span>
+                  {link.label}
+                </a>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      )}
     </header>
   )
 }

@@ -33,7 +33,7 @@ function renderSkill(item: LogoItem) {
 
 function Skills() {
   return (
-    <section id="skills" className="scroll-mt-24 py-20 sm:py-32">
+    <section id="skills" className="scroll-mt-24 py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-6">
         <Reveal>
           <SectionHeading>Skills</SectionHeading>

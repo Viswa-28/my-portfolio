@@ -4,7 +4,7 @@ import SplitText from './SplitText'
 
 function About() {
   return (
-    <section id="about" className="scroll-mt-24 py-20 sm:py-32">
+    <section id="about" className="scroll-mt-24 py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-6">
         <Reveal>
           <SectionHeading>About</SectionHeading>

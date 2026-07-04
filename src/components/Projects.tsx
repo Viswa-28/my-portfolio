@@ -77,7 +77,7 @@ function Projects() {
   return (
     <section
       id="projects"
-      className="scroll-mt-24 overflow-hidden py-20 sm:py-32"
+      className="scroll-mt-24 overflow-hidden py-16 sm:py-24"
     >
       <div className="mx-auto max-w-3xl px-6">
         <Reveal>
