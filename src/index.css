@@ -1,5 +1,100 @@
 @import 'tailwindcss';
 
-html {
-  scroll-behavior: smooth;
+/* ── Locked design system (single source of truth) ──────────────────────
+   Palette: "Deep Pine". One accent green + neutrals, no other hue.
+   Fonts:   Space Grotesk (headings) + IBM Plex Sans (body).
+   Radius:  one value everywhere via --radius-card.
+   Do not hardcode these hex values in components — use the tokens
+   (bg-accent, text-ink, border-line, rounded-card, font-heading, …).      */
+@theme {
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-heading:
+    'Space Grotesk', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0f1a17; /* headings / near-black text */
+  --color-body: #3d4a45; /* body copy */
+  --color-muted: #6b7772; /* captions / secondary */
+  --color-line: #e4e8e6; /* borders / dividers */
+  --color-accent: #1f6f54; /* links, buttons, focus (4.9:1 on white) */
+  --color-accent-hover: #185a44; /* accent, pressed/hover */
+  --color-accent-soft: #e7f1ec; /* soft tint fills / pills */
+
+  --radius-card: 0.625rem; /* 10px — the one border radius */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-body);
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* One visible focus style for every interactive element (never removed). */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+}
+
+/* Hero dot field — adapted from Aceternity UI "Dot Background", recoloured
+   to the accent and masked so it fades out behind the text. Static (CSS). */
+.hero-dots {
+  background-image: radial-gradient(
+    circle,
+    rgba(31, 111, 84, 0.16) 1px,
+    transparent 1.5px
+  );
+  background-size: 20px 20px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 65% at 50% 38%,
+    #000 35%,
+    transparent 80%
+  );
+  mask-image: radial-gradient(
+    ellipse 75% 65% at 50% 38%,
+    #000 35%,
+    transparent 80%
+  );
+}
+
+/* Soft accent glow that gently breathes (CSS keyframes only — not scroll
+   or JS driven). Centring lives on the parent, so this only touches
+   scale/opacity and stays put when the animation is disabled. */
+.hero-glow {
+  animation: hero-glow 9s ease-in-out infinite;
+}
+
+@keyframes hero-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* Honour users who opted out of motion: kill every transition/animation
+   added this phase, and the smooth scroll. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

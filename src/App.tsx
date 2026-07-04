@@ -8,7 +8,7 @@ import Contact from './components/Contact'
 
 function App() {
   return (
-    <div className="min-h-screen bg-white text-gray-800">
+    <div className="min-h-screen bg-white text-body">
       <Navbar />
       <main className="mx-auto max-w-3xl px-6">
         <Hero />
@@ -18,7 +18,7 @@ function App() {
         <Experience />
         <Contact />
       </main>
-      <footer className="border-t border-gray-200 py-8 text-center text-sm text-gray-500">
+      <footer className="border-t border-line py-8 text-center text-sm text-muted">
         © 2026 Viswa · Business &amp; Data Analyst
       </footer>
     </div>
