@@ -12,7 +12,7 @@ function About() {
         <p className="mt-5 max-w-2xl leading-relaxed text-body">
           With a background in PHP development, I bring a practical,
           systems-level understanding of data to business and data analysis.
-          I'm building my analytical toolkit — SQL, Excel, Power BI — through
+          I'm building my analytical toolkit — SQL and Power BI — through
           hands-on projects, and I use AI-assisted development to prototype and
           ship ideas quickly.
         </p>

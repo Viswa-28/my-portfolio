@@ -18,6 +18,7 @@
   --color-accent: #1f6f54; /* links, buttons, focus (4.9:1 on white) */
   --color-accent-hover: #185a44; /* accent, pressed/hover */
   --color-accent-soft: #e7f1ec; /* soft tint fills / pills */
+  --color-accent-light: #7fc9a6; /* same hue, lighter — accent text on dark */
 
   --radius-card: 0.625rem; /* 10px — the one border radius */
 }
