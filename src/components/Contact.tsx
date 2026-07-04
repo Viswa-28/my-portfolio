@@ -15,6 +15,12 @@ const directLinks = [
     href: 'https://www.linkedin.com/in/viswaa28/',
     external: true,
   },
+  {
+    label: 'GitHub',
+    value: 'github.com/Viswa-28',
+    href: 'https://github.com/Viswa-28/',
+    external: true,
+  },
 ]
 
 function Contact() {
@@ -48,14 +54,6 @@ function Contact() {
                 </a>
               </li>
             ))}
-            <li>
-              <span className="inline-flex min-h-11 items-center gap-2">
-                <span className="font-medium text-ink">GitHub:</span>
-                <span className="text-muted">
-                  [ your GitHub URL, if you have one ]
-                </span>
-              </span>
-            </li>
           </ul>
         </Reveal>
       </div>

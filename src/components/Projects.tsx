@@ -16,19 +16,47 @@ type Project = {
 const projects: Project[] = [
   {
     title: 'Workdu',
-    problem: '[ what need did this project address ]',
-    whatIDid: '[ your role / what you built ]',
-    result: '[ outcome, if any ]',
+    problem:
+      'Job seekers and companies needed a single platform to connect — candidates struggle to find genuinely matching roles, while companies need an efficient way to post openings and reach qualified candidates.',
+    whatIDid:
+      'Led development of the core platform as part of the team building Workdu — candidate and employer profiles, job postings, and the application workflow — for a product that also includes AI-assisted job matching and resume tools.',
+    result:
+      'A live platform currently listing active roles from verified employers, including established companies like TCS, Infosys, and Wipro.',
     link: 'https://workdu.com',
-    tags: ['[ tech stack ]'],
+    tags: ['PHP', 'MySQL', 'JavaScript'],
   },
   {
-    title: 'Tev HR Solution',
-    problem: '[ what need did this project address ]',
-    whatIDid: '[ your role / what you built ]',
-    result: '[ outcome, if any ]',
-    link: 'https://tevhrsolution.in',
-    tags: ['[ tech stack ]'],
+    title: 'Tev HR Solutions',
+    problem:
+      'A local HR services company needed a professional web presence to showcase their services — talent acquisition, payroll management, employee engagement, and training — and build credibility with potential business clients.',
+    whatIDid:
+      "Designed and built the company's website from scratch, including a client-facing service overview, a dedicated clients/partners page, and company info pages (About, Contact, Privacy Policy).",
+    result:
+      "A live business website showcasing the company's services and partnerships with logistics companies including Rapido, Bluedart, Porter, and Pidge.",
+    link: 'https://tevhrsolutions.in',
+    tags: ['PHP', 'MySQL', 'JavaScript'],
+  },
+  {
+    title: 'Employee Task Management System',
+    problem:
+      'Small teams needed a simple way to assign tasks and track working hours without adopting a heavyweight HR platform.',
+    whatIDid:
+      'Built a task management system with separate admin and employee dashboards — admins assign tasks and monitor hours, while employees check in, check out, and log attendance, backed by role-based authentication.',
+    result:
+      'A self-built PHP/MySQL project practicing role-based access control and attendance tracking end-to-end.',
+    link: 'https://github.com/Viswa-28/employee-task',
+    tags: ['PHP', 'MySQL', 'JavaScript'],
+  },
+  {
+    title: 'PHP E-Commerce',
+    problem:
+      'Practicing the core mechanics of an online store — product browsing, cart management, and checkout — without relying on a pre-built e-commerce platform.',
+    whatIDid:
+      'Built a PHP e-commerce application from scratch, including an admin panel for managing products, a shopping cart, and a checkout flow, with customer-facing login and contact forms.',
+    result:
+      'A functioning e-commerce demo covering the full purchase flow from product browsing to checkout.',
+    link: 'https://github.com/Viswa-28/php-ecommerce',
+    tags: ['PHP', 'MySQL', 'HTML/CSS'],
   },
 ]
 
