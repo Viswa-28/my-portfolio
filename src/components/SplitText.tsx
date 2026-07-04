@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { motion } from 'motion/react'
 import { prefersReducedMotion } from '../lib/reducedMotion'
 import { splitContainer, splitItem } from '../lib/motion'
@@ -22,6 +23,11 @@ const reduce = prefersReducedMotion
 // Reveals text token-by-token (chars or words), staggered, using transform +
 // opacity only. The full string stays in an aria-label and the split tokens
 // are aria-hidden, so assistive tech reads the phrase, not the fragments.
+//
+// In word mode a real space text node is rendered *between* the inline-block
+// spans (rather than tucked inside each span) — that gives the browser proper
+// word spacing and line-break opportunities. char mode keeps whitespace-pre so
+// an actual space character (if any) isn't collapsed.
 function SplitText({
   text,
   as = 'span',
@@ -33,23 +39,28 @@ function SplitText({
 }: SplitTextProps) {
   const tokens = by === 'char' ? Array.from(text) : text.split(' ')
 
-  const tokenContent = (token: string, i: number) =>
-    by === 'word' && i < tokens.length - 1 ? `${token} ` : token
+  const spanClass = (token: string) =>
+    [
+      'inline-block',
+      by === 'char' ? 'whitespace-pre' : '',
+      highlight && token === highlight ? 'text-accent' : '',
+    ]
+      .filter(Boolean)
+      .join(' ')
 
-  // Reduced motion: render the tokens statically (no animation), but keep the
-  // accent highlight so the deliberate emphasis isn't lost.
+  const gap = (i: number) => (by === 'word' && i < tokens.length - 1 ? ' ' : null)
+
   if (reduce) {
     const Tag = as
     return (
       <Tag className={className} aria-label={text}>
         {tokens.map((token, i) => (
-          <span
-            key={`${token}-${i}`}
-            aria-hidden="true"
-            className={highlight && token === highlight ? 'text-accent' : undefined}
-          >
-            {tokenContent(token, i)}
-          </span>
+          <Fragment key={`${token}-${i}`}>
+            <span aria-hidden="true" className={spanClass(token)}>
+              {token}
+            </span>
+            {gap(i)}
+          </Fragment>
         ))}
       </Tag>
     )
@@ -70,16 +81,16 @@ function SplitText({
       {...activation}
     >
       {tokens.map((token, i) => (
-        <motion.span
-          key={`${token}-${i}`}
-          aria-hidden="true"
-          variants={splitItem}
-          className={`inline-block whitespace-pre${
-            highlight && token === highlight ? ' text-accent' : ''
-          }`}
-        >
-          {tokenContent(token, i)}
-        </motion.span>
+        <Fragment key={`${token}-${i}`}>
+          <motion.span
+            aria-hidden="true"
+            variants={splitItem}
+            className={spanClass(token)}
+          >
+            {token}
+          </motion.span>
+          {gap(i)}
+        </Fragment>
       ))}
     </MotionTag>
   )
