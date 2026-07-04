@@ -1,4 +1,8 @@
+import { motion } from 'motion/react'
 import SectionHeading from './SectionHeading'
+import Reveal from './Reveal'
+import { prefersReducedMotion } from '../lib/reducedMotion'
+import { staggerContainer, staggerItem } from '../lib/motion'
 
 type Project = {
   title: string
@@ -25,18 +29,44 @@ const projects: Project[] = [
   },
 ]
 
+const reduce = prefersReducedMotion
+
+// Border + shadow hover stay in CSS. The lift is transform, which Motion
+// owns while animated (whileHover) so its inline transform doesn't fight the
+// class; reduced-motion cards keep the CSS lift (instant via the global
+// reduced-motion rule).
+const cardBase =
+  'group rounded-card border border-line bg-white p-6 hover:border-accent/50 hover:shadow-[0_12px_32px_-16px_rgba(31,111,84,0.35)]'
+
 function Projects() {
   return (
     <section
       id="projects"
       className="scroll-mt-24 border-t border-line py-16 sm:py-20"
     >
-      <SectionHeading>Projects</SectionHeading>
-      <div className="mt-6 space-y-6">
+      <Reveal>
+        <SectionHeading>Projects</SectionHeading>
+      </Reveal>
+      <motion.div
+        className="mt-6 space-y-6"
+        variants={reduce ? undefined : staggerContainer}
+        initial={reduce ? undefined : 'hidden'}
+        whileInView={reduce ? undefined : 'show'}
+        viewport={{ once: true, amount: 0.2 }}
+      >
         {projects.map((project) => (
-          <article
+          <motion.article
             key={project.title}
-            className="group rounded-card border border-line bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-[0_12px_32px_-16px_rgba(31,111,84,0.35)]"
+            variants={reduce ? undefined : staggerItem}
+            whileHover={reduce ? undefined : { y: -4 }}
+            transition={
+              reduce ? undefined : { type: 'spring', stiffness: 300, damping: 22 }
+            }
+            className={
+              reduce
+                ? `${cardBase} transition-all duration-300 hover:-translate-y-1`
+                : `${cardBase} transition-[border-color,box-shadow] duration-300`
+            }
           >
             <h3 className="font-heading text-lg font-bold text-ink transition-colors group-hover:text-accent">
               {project.title}
@@ -64,9 +94,9 @@ function Projects() {
               {project.link}
               <span aria-hidden="true">→</span>
             </a>
-          </article>
+          </motion.article>
         ))}
-      </div>
+      </motion.div>
     </section>
   )
 }
