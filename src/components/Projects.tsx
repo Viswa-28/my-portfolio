@@ -7,10 +7,10 @@ import CountUp from './CountUp'
 import { prefersReducedMotion } from '../lib/reducedMotion'
 import { staggerContainer, staggerItem } from '../lib/motion'
 
-// Honest, verifiable figures — 2 live projects (Workdu, Tev HR Solutions)
-// and 11 tools in the Skills marquee.
+// Honest, verifiable figures — 3 live projects (Workdu, Tev HR Solutions,
+// Tourglobe) and 11 tools in the Skills marquee.
 const stats: { end: number; suffix?: string; label: string }[] = [
-  { end: 2, label: 'Live projects' },
+  { end: 3, label: 'Live projects' },
   { end: 10, suffix: '+', label: 'Tools & tech' },
 ]
 
@@ -45,6 +45,17 @@ const projects: Project[] = [
       "A live business website showcasing the company's services and partnerships with logistics companies including Rapido, Bluedart, Porter, and Pidge.",
     link: 'https://tevhrsolutions.in',
     tags: ['PHP', 'MySQL', 'JavaScript'],
+  },
+  {
+    title: 'Tourglobe',
+    problem:
+      'A premium tourism consultancy needed a professional web presence to showcase its range of specialty travel categories and tour operations, and to build credibility as a quality-focused alternative to price-driven booking platforms.',
+    whatIDid:
+      "Designed and built the company's website from scratch with Next.js, structuring content around its specialty tourism categories (cultural, pilgrimage, culinary, wellness, wildlife, and more), its outbound/incoming/domestic/MICE tour operations, and an enquiry workflow for prospective travelers.",
+    result:
+      "A live consultancy website presenting the company's full range of services alongside its related brands, Tourindias.com and Vayoaura.com.",
+    link: 'https://tourglobe.in',
+    tags: ['Next.js', 'React', 'Tailwind CSS'],
   },
 ]
 

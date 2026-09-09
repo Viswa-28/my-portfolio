@@ -63,12 +63,12 @@ function Hero() {
         <SplitText
           as="p"
           by="word"
-          text="Business & Data Analyst"
+          text="Full Stack Developer"
           delay={0.5}
           className="mt-4 font-heading text-hero-sub font-medium text-accent sm:mt-6"
         />
         <motion.p {...rise(0.9)} className="mt-3 text-base text-muted sm:mt-4">
-          Developer background · SQL · Power BI
+          PHP · JavaScript · Next.js · MySQL
         </motion.p>
 
         <motion.div
