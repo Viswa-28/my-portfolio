@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import SplitText from './SplitText'
-import DotGrid from './DotGrid'
+import heroPhoto from '../assets/hero-desk.png'
 import { prefersReducedMotion } from '../lib/reducedMotion'
 import { EASE } from '../lib/motion'
 
 const reduce = prefersReducedMotion
-const DESKTOP_MIN_WIDTH = 768
 
 // Block-level fade+rise, sequenced after the split-text reveals. Empty props
 // for reduced-motion users so content shows immediately.
@@ -20,45 +18,31 @@ const rise = (delay: number) =>
       }
 
 function Hero() {
-  // Interactive canvas grid only on desktop + when motion is allowed; mobile
-  // and reduced-motion get the static CSS grid instead.
-  const [interactive, setInteractive] = useState(false)
-
-  useEffect(() => {
-    if (reduce) return
-    const check = () => setInteractive(window.innerWidth >= DESKTOP_MIN_WIDTH)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-
   return (
     <section
       id="hero"
-      className="relative scroll-mt-24 overflow-hidden py-28 text-center sm:py-40"
+      className="relative isolate flex min-h-[100svh] scroll-mt-24 items-end overflow-hidden text-center"
     >
-      {/* Interactive dot grid (desktop) or static grid (fallback) + glow. */}
+      {/* Full-bleed desk scene, darkened so the overlaid text stays readable. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
+        className="absolute inset-0 -z-10 bg-[#04070a]"
       >
-        {interactive ? (
-          <DotGrid className="hero-mask absolute inset-0 h-full w-full" />
-        ) : (
-          <div className="hero-grid hero-mask absolute inset-0" />
-        )}
-        <div className="absolute top-14 left-1/2 -translate-x-1/2 sm:top-16">
-          <div className="hero-glow h-56 w-56 rounded-full bg-accent/15 blur-3xl sm:h-72 sm:w-72" />
-        </div>
+        <img
+          src={heroPhoto}
+          alt=""
+          className="h-full w-full object-cover brightness-[0.85]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/20" />
       </div>
 
-      <div className="mx-auto max-w-3xl px-6">
+      <div className="mx-auto max-w-3xl px-6 pt-28 pb-24 sm:pb-28">
         <SplitText
           as="h1"
           by="char"
           text="Viswa"
           delay={0.1}
-          className="font-heading text-hero font-bold tracking-tight text-ink"
+          className="font-heading text-hero font-bold tracking-tight text-white"
         />
         <SplitText
           as="p"
@@ -67,7 +51,10 @@ function Hero() {
           delay={0.5}
           className="mt-4 font-heading text-hero-sub font-medium text-accent sm:mt-6"
         />
-        <motion.p {...rise(0.9)} className="mt-3 text-base text-muted sm:mt-4">
+        <motion.p
+          {...rise(0.9)}
+          className="mt-3 text-base text-white/70 sm:mt-4"
+        >
           PHP · JavaScript · Next.js · MySQL
         </motion.p>
 
@@ -83,12 +70,44 @@ function Hero() {
           </a>
           <a
             href="#contact"
-            className="inline-flex min-h-11 w-full items-center justify-center rounded-card border border-muted px-5 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent sm:w-auto"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-card border border-white/50 px-5 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10 sm:w-auto"
           >
             Get in touch
           </a>
         </motion.div>
       </div>
+
+      {/* Scroll cue. */}
+      <motion.a
+        href="#about"
+        aria-label="Scroll to About section"
+        {...rise(1.3)}
+        animate={
+          reduce
+            ? undefined
+            : { opacity: 1, y: [0, 8, 0] }
+        }
+        transition={
+          reduce
+            ? undefined
+            : { opacity: { duration: 0.5, delay: 1.3 }, y: { duration: 1.8, repeat: Infinity, ease: 'easeInOut', delay: 1.3 } }
+        }
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 transition-colors hover:text-white"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </motion.a>
     </section>
   )
 }
