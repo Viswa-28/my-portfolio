@@ -1,24 +1,31 @@
 @import 'tailwindcss';
 
 /* ── Locked design system (single source of truth) ──────────────────────
-   Palette: "Deep Pine". One accent green + neutrals, no other hue.
-   Fonts:   Space Grotesk (headings) + IBM Plex Sans (body).
+   Palette: dark canvas + a single amber accent, no other hue.
+   Fonts:   Manrope throughout (heavier weights carry the headings).
    Radius:  one value everywhere via --radius-card.
    Do not hardcode these hex values in components — use the tokens
    (bg-accent, text-ink, border-line, rounded-card, font-heading, …).      */
 @theme {
-  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-heading:
-    'Space Grotesk', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Manrope', ui-sans-serif, system-ui, sans-serif;
 
-  --color-ink: #0f1a17; /* headings / near-black text */
-  --color-body: #3d4a45; /* body copy */
-  --color-muted: #6b7772; /* captions / secondary */
-  --color-line: #e4e8e6; /* borders / dividers */
-  --color-accent: #1f6f54; /* links, buttons, focus (4.9:1 on white) */
-  --color-accent-hover: #185a44; /* accent, pressed/hover */
+  --color-background: #0b0c0f; /* page canvas */
+  --color-surface: #121419; /* raised panels / inputs */
+  --color-card: #181b21; /* cards on the canvas */
+
+  --color-ink: #f5f3ee; /* headings / brightest text */
+  --color-body: #a5a7ad; /* body copy (8.1:1 on canvas) */
+  --color-muted: #8a8d94; /* captions / secondary (5.9:1 on canvas) */
+  --color-line: #292c33; /* borders / dividers */
+  --color-accent: #f5b942; /* links, buttons, focus (11:1 on canvas) */
+  --color-accent-hover: #ffd166; /* accent, pressed/hover */
+  --color-on-accent: #0b0c0f; /* text/icons sitting on an accent fill */
 
   --radius-card: 0.625rem; /* 10px — the one border radius */
+  --radius-panel: 1.5rem; /* 24px — large editorial panels / case-study cards */
+
+  --tracking-display: -0.03em; /* headline tracking (PRD §4) */
 
   /* Fluid, typography-led scale. Every large size is vw+vh based so it
      scales with both screen width and height, and is clamped so it never
@@ -43,9 +50,14 @@
   body {
     font-family: var(--font-sans);
     color: var(--color-body);
-    background-color: #ffffff;
+    background-color: var(--color-background);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  /* Long-form copy target from PRD §4. */
+  p {
+    line-height: 1.65;
   }
 
   /* One visible focus style for every interactive element (never removed). */
@@ -54,6 +66,26 @@
     outline-offset: 2px;
     border-radius: 3px;
   }
+}
+
+/* Warm gradient used on the emphasised half of the hero headline. */
+.text-gradient-accent {
+  background-image: linear-gradient(
+    to right,
+    var(--color-accent),
+    var(--color-accent-hover) 45%,
+    var(--color-ink)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Soft amber bloom behind hero / CTA panels. Decorative only. */
+.ambient-glow {
+  background: var(--color-accent);
+  opacity: 0.1;
+  filter: blur(140px);
 }
 
 /* Radial fade so hero background layers dissolve behind the centred text. */
@@ -75,8 +107,8 @@
    fallback on mobile / reduced-motion where the interactive canvas is off. */
 .hero-grid {
   background-image:
-    linear-gradient(to right, rgba(31, 111, 84, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(31, 111, 84, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgba(245, 185, 66, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 185, 66, 0.07) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 

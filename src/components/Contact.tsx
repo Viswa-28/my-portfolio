@@ -1,61 +1,61 @@
-import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
 import ContactForm from './ContactForm'
 
-const directLinks = [
-  {
-    label: 'Email',
-    value: 'viswaa288@gmail.com',
-    href: 'mailto:viswaa288@gmail.com',
-    external: false,
-  },
-  {
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/viswaa28',
-    href: 'https://www.linkedin.com/in/viswaa28/',
-    external: true,
-  },
-  {
-    label: 'GitHub',
-    value: 'github.com/Viswa-28',
-    href: 'https://github.com/Viswa-28/',
-    external: true,
-  },
-]
+const EMAIL = 'viswaa288@gmail.com'
 
 function Contact() {
   return (
-    <section id="contact" className="scroll-mt-24 py-16 sm:py-24">
-      <div className="mx-auto max-w-3xl px-6">
-        <Reveal>
-          <SectionHeading>Contact</SectionHeading>
-          <p className="mt-6 max-w-lg text-lg text-body sm:text-xl">
-            Have a role or project in mind? Send a message below, or connect
-            directly.
-          </p>
+    <section
+      id="contact"
+      className="scroll-mt-24 px-6 py-16 lg:px-12 lg:py-28"
+    >
+      <div className="mx-auto max-w-[1440px]">
+        <div className="relative isolate overflow-hidden rounded-panel border border-line bg-card p-6 lg:p-16">
+          <div
+            aria-hidden="true"
+            className="ambient-glow pointer-events-none absolute -top-32 left-1/2 -z-10 h-[300px] w-[600px] -translate-x-1/2 rounded-full"
+          />
 
-          <ContactForm />
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <Reveal>
+                <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2">
+                  <span className="h-2 w-2 shrink-0 rounded-full bg-accent" />
+                  <span className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">
+                    Let's connect
+                  </span>
+                </div>
 
-          <h3 className="mt-10 font-heading text-xs font-semibold tracking-[0.15em] text-muted uppercase">
-            Or reach me directly
-          </h3>
-          <ul className="mt-3 text-base text-body">
-            {directLinks.map((link) => (
-              <li key={link.label}>
+                <h2 className="mt-6 font-heading text-lede font-bold tracking-[-0.03em] text-ink">
+                  Have an idea or a business that needs a better digital
+                  presence?
+                </h2>
+                <p className="mt-4 max-w-md text-base text-body lg:text-lg">
+                  Tell me what you're trying to achieve and we'll work out what
+                  actually makes sense.
+                </p>
+
+                <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-xs font-medium text-muted">
+                  <span className="text-accent">✉</span>
+                  <span>Direct reply within 24 hours</span>
+                </div>
+
                 <a
-                  href={link.href}
-                  {...(link.external
-                    ? { target: '_blank', rel: 'noopener noreferrer' }
-                    : {})}
-                  className="inline-flex min-h-11 items-center gap-2 break-all transition-colors hover:text-accent"
+                  href={`mailto:${EMAIL}`}
+                  className="mt-4 block text-sm font-semibold break-all text-accent transition-colors hover:text-accent-hover"
                 >
-                  <span className="font-medium text-ink">{link.label}:</span>
-                  <span className="text-accent">{link.value}</span>
+                  {EMAIL}
                 </a>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+              </Reveal>
+            </div>
+
+            <div className="lg:col-span-7">
+              <Reveal>
+                <ContactForm />
+              </Reveal>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

@@ -5,7 +5,7 @@
 
   --logoloop-gap: 32px;
   --logoloop-logoHeight: 28px;
-  --logoloop-fadeColorAuto: #ffffff;
+  --logoloop-fadeColorAuto: #0b0c0f;
 }
 
 .logoloop--vertical {
@@ -16,12 +16,6 @@
 .logoloop--scale-hover {
   padding-top: calc(var(--logoloop-logoHeight) * 0.1);
   padding-bottom: calc(var(--logoloop-logoHeight) * 0.1);
-}
-
-@media (prefers-color-scheme: dark) {
-  .logoloop {
-    --logoloop-fadeColorAuto: #0b0b0b;
-  }
 }
 
 .logoloop__track {

@@ -15,8 +15,8 @@ function DotGrid({ className }: { className?: string }) {
     if (!ctx) return
 
     const styles = getComputedStyle(document.documentElement)
-    const accent = styles.getPropertyValue('--color-accent').trim() || '#1f6f54'
-    const muted = styles.getPropertyValue('--color-muted').trim() || '#6b7772'
+    const accent = styles.getPropertyValue('--color-accent').trim() || '#f5b942'
+    const muted = styles.getPropertyValue('--color-muted').trim() || '#8a8d94'
 
     const SPACING = 30
     const RADIUS = 130 // cursor influence radius

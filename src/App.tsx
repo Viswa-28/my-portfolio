@@ -4,11 +4,13 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Experience from './components/Experience'
+import Capabilities from './components/Capabilities'
+import Services from './components/Services'
+import Work from './components/Work'
+import Process from './components/Process'
+import BehindTheWork from './components/BehindTheWork'
 import Contact from './components/Contact'
+import Footer from './components/Footer'
 import { prefersReducedMotion } from './lib/reducedMotion'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -35,19 +37,18 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white text-body">
+    <div className="min-h-screen bg-background text-body">
       <Navbar />
       <main>
         <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
+        <Capabilities />
+        <Services />
+        <Work />
+        <Process />
+        <BehindTheWork />
         <Contact />
       </main>
-      <footer className="border-t border-line px-6 py-8 text-center text-sm text-muted">
-        © 2026 Viswa · Business &amp; Data Analyst
-      </footer>
+      <Footer />
     </div>
   )
 }
