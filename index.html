@@ -2,13 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0B0C0F" />
+    <meta name="theme-color" content="#0B0B0F" />
     <meta name="color-scheme" content="dark" />
     <meta
       name="description"
-      content="Viswa — web developer and digital growth specialist helping businesses build a stronger online presence through websites, SEO, social media, and practical digital strategies."
+      content="LunoLab is a digital growth studio run by Viswa — websites, SEO, social media and analytics that turn a business's online presence into enquiries. Ideas → presence → results."
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/hero-desk.jpg"
+      fetchpriority="high"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,17 +23,17 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <title>Viswa — Web Developer &amp; Digital Growth Specialist</title>
+    <title>LunoLab — Digital Growth Studio</title>
 
     <!-- Open Graph / link previews (LinkedIn, etc.) -->
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Viswa — Web Developer &amp; Digital Growth Specialist"
+      content="LunoLab — Digital Growth Studio"
     />
     <meta
       property="og:description"
-      content="I build digital experiences that help businesses grow — websites, SEO, social media, and practical digital strategies."
+      content="Websites, SEO, social media and analytics that help businesses grow. Ideas → presence → results."
     />
     <!-- TODO once deployed: set og:url to the live domain, and add og:image
          (1200x630 PNG/JPG) — no image asset exists yet, so it's omitted
@@ -42,6 +49,7 @@
             "@id": "#viswa",
             "name": "Viswa",
             "jobTitle": "Web Developer & Digital Growth Specialist",
+            "worksFor": { "@id": "#lunolab" },
             "email": "mailto:viswaa288@gmail.com",
             "sameAs": [
               "https://www.linkedin.com/in/viswaa28/",
@@ -57,7 +65,10 @@
           },
           {
             "@type": "ProfessionalService",
-            "name": "Viswa — Web Development & Digital Growth",
+            "@id": "#lunolab",
+            "name": "LunoLab",
+            "alternateName": "LunoLab Digital Growth Studio",
+            "slogan": "Ideas → Presence → Results",
             "founder": { "@id": "#viswa" },
             "areaServed": "IN",
             "email": "mailto:viswaa288@gmail.com",
@@ -65,8 +76,9 @@
           },
           {
             "@type": "WebSite",
-            "name": "Viswa",
+            "name": "LunoLab",
             "inLanguage": "en",
+            "publisher": { "@id": "#lunolab" },
             "author": { "@id": "#viswa" }
           }
         ]

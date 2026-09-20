@@ -2,21 +2,12 @@ import { motion } from 'motion/react'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
 import SplitText from './SplitText'
-import CountUp from './CountUp'
 import LogoLoop, { type LogoItem } from './LogoLoop'
 import { techLogos } from '../data/techLogos'
 import { prefersReducedMotion } from '../lib/reducedMotion'
 import { staggerContainer, staggerItem } from '../lib/motion'
 
 const reduce = prefersReducedMotion
-
-// Verifiable only — 4 shipped sites, the 11 tools in the marquee below, and a
-// response window that is a commitment rather than a measurement.
-const metrics: { end: number; suffix: string; label: string }[] = [
-  { end: 4, suffix: '', label: 'Live projects' },
-  { end: 10, suffix: '+', label: 'Tools & tech' },
-  { end: 24, suffix: 'h', label: 'Reply window' },
-]
 
 const capabilities: { title: string; detail: string }[] = [
   {
@@ -98,22 +89,6 @@ function Capabilities() {
                 measure what happens next. I focus on practical solutions instead
                 of unnecessary complexity.
               </p>
-
-              <ul className="mt-10 grid grid-cols-3 gap-3">
-                {metrics.map((metric) => (
-                  <li
-                    key={metric.label}
-                    className="rounded-card border border-line bg-card p-4"
-                  >
-                    <span className="block font-heading text-2xl font-bold text-accent lg:text-3xl">
-                      <CountUp end={metric.end} suffix={metric.suffix} />
-                    </span>
-                    <span className="mt-1 block text-xs font-medium tracking-[0.1em] text-muted uppercase">
-                      {metric.label}
-                    </span>
-                  </li>
-                ))}
-              </ul>
             </Reveal>
           </div>
 
@@ -165,7 +140,7 @@ function Capabilities() {
                 hoverSpeed={0}
                 scaleOnHover
                 fadeOut
-                fadeOutColor="#0b0c0f"
+                fadeOutColor="#0b0b0f"
                 ariaLabel="Tools and technologies I work with"
                 renderItem={renderSkill}
               />

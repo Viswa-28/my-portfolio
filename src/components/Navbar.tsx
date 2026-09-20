@@ -85,11 +85,12 @@ function Navbar() {
           >
             <Logo className="h-9 w-9 shrink-0" />
             <span className="flex flex-col leading-none">
-              <span className="font-heading text-lg font-extrabold tracking-tight text-accent">
-                VISWA
+              {/* LUNO in ink, LAB in the accent — the split the mark uses. */}
+              <span className="font-heading text-lg font-extrabold tracking-tight text-ink">
+                LUNO<span className="text-accent">LAB</span>
               </span>
               <span className="mt-0.5 hidden text-[10px] font-semibold tracking-[0.18em] text-muted uppercase sm:inline">
-                Dev &amp; Digital Growth
+                Digital Growth Studio
               </span>
             </span>
           </a>
@@ -125,11 +126,19 @@ function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
+            {/* Over the hero the hero's own filled CTA is the primary action,
+                so this stays an outline to avoid two identical primaries on
+                one screen; once the page scrolls past it, this becomes the
+                primary and fills in. */}
             <a
               href="#contact"
-              className="hidden min-h-11 items-center rounded-full bg-accent px-5 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover sm:inline-flex"
+              className={`hidden min-h-11 items-center rounded-full px-5 text-sm font-semibold transition-colors sm:inline-flex ${
+                solid
+                  ? 'bg-accent text-on-accent hover:bg-accent-hover'
+                  : 'border border-line bg-card text-ink hover:border-accent/50 hover:text-accent'
+              }`}
             >
-              Let's Work Together
+              Get in Touch
             </a>
 
             {/* Mobile: hamburger / close toggle (44x44 tap target). */}

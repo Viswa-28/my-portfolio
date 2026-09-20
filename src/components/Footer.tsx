@@ -30,12 +30,12 @@ function Footer() {
           <div className="flex flex-col gap-4 lg:col-span-5">
             <div className="flex items-center gap-2.5">
               <Logo className="h-8 w-8 shrink-0" />
-              <span className="font-heading text-xl font-extrabold tracking-tight text-accent">
-                VISWA
+              <span className="font-heading text-xl font-extrabold tracking-tight text-ink">
+                LUNO<span className="text-accent">LAB</span>
               </span>
             </div>
             <p className="text-xs font-semibold tracking-[0.15em] text-muted uppercase">
-              Web Developer · Digital Growth
+              Digital Growth Studio
             </p>
             <p className="max-w-sm text-sm text-body">
               I build websites for businesses that need their online presence to
@@ -96,7 +96,7 @@ function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-2 border-t border-line pt-8 text-xs text-muted md:flex-row">
-          <p>© {new Date().getFullYear()} Viswa. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} LunoLab. All rights reserved.</p>
           <p>Built with React, Tailwind CSS, and Vite.</p>
         </div>
       </div>

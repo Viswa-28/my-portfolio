@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Capabilities from './components/Capabilities'
@@ -13,25 +11,25 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { prefersReducedMotion } from './lib/reducedMotion'
 
-gsap.registerPlugin(ScrollTrigger)
-
 function App() {
-  // Lenis smooth scroll, wired to drive ScrollTrigger. Skipped entirely for
-  // reduced-motion users — they get native scroll.
+  // Lenis smooth scroll on a plain rAF loop. This used to run on gsap.ticker,
+  // but GSAP + ScrollTrigger were pulled in solely to be that ticker — there
+  // was never a tween or a trigger (every scroll reveal is Motion's
+  // whileInView), so the dependency was ~30KB gzipped of pure overhead.
+  // Skipped entirely for reduced-motion users — they get native scroll.
   useEffect(() => {
     if (prefersReducedMotion) return
 
     const lenis = new Lenis()
-    lenis.on('scroll', ScrollTrigger.update)
-
-    const onTick = (time: number) => {
-      lenis.raf(time * 1000)
+    let frame = 0
+    const loop = (time: number) => {
+      lenis.raf(time)
+      frame = requestAnimationFrame(loop)
     }
-    gsap.ticker.add(onTick)
-    gsap.ticker.lagSmoothing(0)
+    frame = requestAnimationFrame(loop)
 
     return () => {
-      gsap.ticker.remove(onTick)
+      cancelAnimationFrame(frame)
       lenis.destroy()
     }
   }, [])

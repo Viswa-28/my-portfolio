@@ -27,7 +27,7 @@ export const splitContainer = (by: 'char' | 'word', delay: number): Variants => 
   hidden: {},
   show: {
     transition: {
-      staggerChildren: by === 'char' ? 0.04 : 0.08,
+      staggerChildren: by === 'char' ? 0.03 : 0.05,
       delayChildren: delay,
     },
   },

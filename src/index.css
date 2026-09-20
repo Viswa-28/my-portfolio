@@ -1,7 +1,10 @@
 @import 'tailwindcss';
 
 /* ── Locked design system (single source of truth) ──────────────────────
-   Palette: dark canvas + a single amber accent, no other hue.
+   Palette: neutral near-black canvas + a single periwinkle accent drawn
+   from the LunoLab mark. The canvas stays hue-neutral on purpose — the
+   indigo lives only in the accent, which is what keeps this reading as a
+   studio rather than the usual purple-gradient-everywhere look.
    Fonts:   Manrope throughout (heavier weights carry the headings).
    Radius:  one value everywhere via --radius-card.
    Do not hardcode these hex values in components — use the tokens
@@ -10,17 +13,27 @@
   --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
   --font-heading: 'Manrope', ui-sans-serif, system-ui, sans-serif;
 
-  --color-background: #0b0c0f; /* page canvas */
-  --color-surface: #121419; /* raised panels / inputs */
-  --color-card: #181b21; /* cards on the canvas */
+  --color-background: #0b0b0f; /* page canvas — neutral, not navy */
+  --color-surface: #131319; /* raised panels / inputs */
+  --color-card: #17171f; /* cards on the canvas */
 
-  --color-ink: #f5f3ee; /* headings / brightest text */
-  --color-body: #a5a7ad; /* body copy (8.1:1 on canvas) */
-  --color-muted: #8a8d94; /* captions / secondary (5.9:1 on canvas) */
-  --color-line: #292c33; /* borders / dividers */
-  --color-accent: #f5b942; /* links, buttons, focus (11:1 on canvas) */
-  --color-accent-hover: #ffd166; /* accent, pressed/hover */
-  --color-on-accent: #0b0c0f; /* text/icons sitting on an accent fill */
+  --color-ink: #f4f4f7; /* headings / brightest text (17.9:1) */
+  --color-body: #a6a6b2; /* body copy (8.2:1 on canvas) */
+  --color-muted: #8b8b99; /* captions / secondary (5.9:1 on canvas) */
+  --color-line: #282833; /* borders / dividers */
+
+  /* The accent is the LunoLab mark's LAVENDER, not its saturated indigo.
+     The logo's own #6060f0 measures 4.1:1 on this canvas — it fails AA for
+     body-size text, and every small uppercase label, metric and link on the
+     site is body-size. This lifted tint keeps the identity and passes. */
+  --color-accent: #a79bff; /* links, buttons, focus (8.2:1 on canvas) */
+  --color-accent-hover: #c4bcff; /* accent, pressed/hover (11.2:1) */
+  --color-on-accent: #0b0b0f; /* text/icons on an accent fill (8.2:1) */
+
+  /* The saturated indigo straight off the logo. NON-TEXT ONLY — the mark
+     itself and the ambient wash. Never put body copy on or in it. */
+  --color-brand: #6057f0;
+  --color-brand-deep: #4438e8;
 
   --radius-card: 0.625rem; /* 10px — the one border radius */
   --radius-panel: 1.5rem; /* 24px — large editorial panels / case-study cards */
@@ -68,67 +81,13 @@
   }
 }
 
-/* Warm gradient used on the emphasised half of the hero headline. */
-.text-gradient-accent {
-  background-image: linear-gradient(
-    to right,
-    var(--color-accent),
-    var(--color-accent-hover) 45%,
-    var(--color-ink)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Soft amber bloom behind hero / CTA panels. Decorative only. */
+/* Soft indigo wash behind hero / CTA panels. Decorative only.
+   Deliberately fainter than the amber it replaces: a saturated purple bloom
+   at the old 0.1 opacity is the single biggest "AI landing page" tell. */
 .ambient-glow {
-  background: var(--color-accent);
-  opacity: 0.1;
-  filter: blur(140px);
-}
-
-/* Radial fade so hero background layers dissolve behind the centred text. */
-.hero-mask {
-  -webkit-mask-image: radial-gradient(
-    ellipse 75% 65% at 50% 38%,
-    #000 30%,
-    transparent 78%
-  );
-  mask-image: radial-gradient(
-    ellipse 75% 65% at 50% 38%,
-    #000 30%,
-    transparent 78%
-  );
-}
-
-/* Hero graph-paper grid — a quiet, data-oriented texture in the accent,
-   masked so it fades out behind the text. Static (CSS only); used as the
-   fallback on mobile / reduced-motion where the interactive canvas is off. */
-.hero-grid {
-  background-image:
-    linear-gradient(to right, rgba(245, 185, 66, 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(245, 185, 66, 0.07) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-/* Soft accent glow that gently breathes (CSS keyframes only — not scroll
-   or JS driven). Centring lives on the parent, so this only touches
-   scale/opacity and stays put when the animation is disabled. */
-.hero-glow {
-  animation: hero-glow 9s ease-in-out infinite;
-}
-
-@keyframes hero-glow {
-  0%,
-  100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.1);
-  }
+  background: var(--color-brand);
+  opacity: 0.055;
+  filter: blur(160px);
 }
 
 /* Honour users who opted out of motion: kill every transition/animation
