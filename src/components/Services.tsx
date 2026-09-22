@@ -72,7 +72,7 @@ function Services() {
             <div>
               <SectionHeading index="02">Core Expertise</SectionHeading>
               <p className="mt-3 font-heading text-lede font-bold tracking-[-0.03em] text-ink">
-                What I Can Help You With
+                What We Do
               </p>
             </div>
             <p className="max-w-sm text-base text-body">
@@ -128,9 +128,9 @@ function Services() {
                 Not sure which you need?
               </h3>
               <p className="mt-3 text-sm text-body">
-                Describe the problem and I'll tell you what would actually move
-                the needle — even if that turns out to be less work than you
-                expected.
+                Describe the problem and we'll tell you what would actually
+                move the needle — even if that turns out to be less work than
+                you expected.
               </p>
             </div>
             <a

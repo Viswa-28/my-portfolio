@@ -38,8 +38,8 @@ function Footer() {
               Digital Growth Studio
             </p>
             <p className="max-w-sm text-sm text-body">
-              I build websites for businesses that need their online presence to
-              do real work — and then I help them measure whether it did.
+              LunoLab builds websites for businesses that need their online presence
+              to do real work — then measures whether it did.
             </p>
             <div className="mt-1 inline-flex w-fit items-center gap-2 rounded-full border border-accent/30 bg-card px-3 py-1.5">
               <span className="h-2 w-2 shrink-0 rounded-full bg-accent" />

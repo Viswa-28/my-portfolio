@@ -27,7 +27,7 @@ function Work() {
             <div>
               <SectionHeading index="03">Selected Work</SectionHeading>
               <p className="mt-3 font-heading text-lede font-bold tracking-[-0.03em] text-ink">
-                Sites I've Shipped
+                Work We've Shipped
               </p>
               <p className="mt-3 max-w-lg text-base text-body">
                 Every project below is live. The link on each card goes straight
@@ -122,7 +122,7 @@ function Work() {
                           </div>
                           <div>
                             <dt className="inline font-semibold text-ink">
-                              What I did —{' '}
+                              What we did —{' '}
                             </dt>
                             <dd className="inline">{project.whatIDid}</dd>
                           </div>
@@ -194,7 +194,7 @@ function Work() {
                 Ready to build a site that actually earns its keep?
               </h3>
               <p className="mt-2 max-w-xl text-base text-body">
-                Tell me where your current site falls short and I'll tell you
+                Tell us where your current site falls short and we'll tell you
                 what would fix it.
               </p>
             </div>
@@ -203,14 +203,14 @@ function Work() {
                 href="#contact"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-6 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-hover"
               >
-                Let's Work Together
+                Start a project
                 <span aria-hidden="true">→</span>
               </a>
               <a
                 href="#process"
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-line bg-surface px-6 text-sm font-semibold text-ink transition-colors hover:border-accent/50 hover:text-accent"
               >
-                See how I work
+                See how we work
               </a>
             </div>
           </div>

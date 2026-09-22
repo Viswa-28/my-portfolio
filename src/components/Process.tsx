@@ -44,7 +44,7 @@ function Process() {
         <Reveal>
           <SectionHeading index="04">Methodology</SectionHeading>
           <p className="mt-3 font-heading text-lede font-bold tracking-[-0.03em] text-ink">
-            How I Work
+            How We Work
           </p>
           <p className="mt-3 max-w-xl text-base text-body">
             The same five steps every time, so you always know where a project

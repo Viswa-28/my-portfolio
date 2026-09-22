@@ -79,15 +79,15 @@ function Capabilities() {
               by="word"
               trigger="scroll"
               highlight="works."
-              text="I combine web development, design, SEO, and digital marketing to help businesses turn their online presence into something that actually works."
+              text="LunoLab combines web development, design, SEO, and digital marketing to help businesses turn their online presence into something that actually works."
               className="max-w-2xl font-heading text-lede font-bold tracking-[-0.03em] text-ink"
             />
             <Reveal>
               <p className="mt-6 max-w-xl text-base text-body lg:text-lg">
-                My approach is simple: understand the business, identify what is
-                holding its digital presence back, build the right solution, and
-                measure what happens next. I focus on practical solutions instead
-                of unnecessary complexity.
+                The approach is simple: understand the business, identify what
+                is holding its digital presence back, build the right solution,
+                and measure what happens next. We favour practical solutions
+                over unnecessary complexity.
               </p>
             </Reveal>
           </div>
@@ -118,7 +118,7 @@ function Capabilities() {
         {/* Toolset marquee — reduced-motion users get a static wrapped list. */}
         <Reveal>
           <p className="mt-16 text-xs font-semibold tracking-[0.2em] text-muted uppercase">
-            Tools I work with
+            Tools we work with
           </p>
           {reduce ? (
             <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
@@ -141,7 +141,7 @@ function Capabilities() {
                 scaleOnHover
                 fadeOut
                 fadeOutColor="#0b0b0f"
-                ariaLabel="Tools and technologies I work with"
+                ariaLabel="Tools and technologies we work with"
                 renderItem={renderSkill}
               />
             </div>

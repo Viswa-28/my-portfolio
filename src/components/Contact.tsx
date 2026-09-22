@@ -31,7 +31,7 @@ function Contact() {
                   presence?
                 </h2>
                 <p className="mt-4 max-w-md text-base text-body lg:text-lg">
-                  Tell me what you're trying to achieve and we'll work out what
+                  Tell us what you're trying to achieve and we'll work out what
                   actually makes sense.
                 </p>
 
