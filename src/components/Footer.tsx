@@ -1,11 +1,16 @@
+import { useLocation } from 'react-router-dom'
 import Logo from './Logo'
+import { SITE, whatsappLink, telLink, phoneDisplay } from './../lib/site'
 
-const services = [
-  'Websites',
-  'SEO',
-  'Social Media',
-  'Digital Growth',
-  'Analytics & Reports',
+// The service pages are the site's whole local-SEO play, so they need real
+// internal links pointing at them — a sitemap entry alone leaves them orphans
+// with no authority flowing in. The last two have no page yet and stay plain.
+const services: { label: string; href?: string }[] = [
+  { label: 'Web Design', href: '/web-design-madurai' },
+  { label: 'SEO Services', href: '/seo-services-madurai' },
+  { label: 'Social Media', href: '/social-media-marketing-madurai' },
+  { label: 'Digital Growth' },
+  { label: 'Analytics & Reports' },
 ]
 
 const navLinks = [
@@ -23,6 +28,10 @@ const socials = [
 ]
 
 function Footer() {
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
+  const hrefFor = (hash: string) => (isHome ? hash : `/${hash}`)
+
   return (
     <footer className="border-t border-line px-6 py-16 lg:px-12">
       <div className="mx-auto max-w-[1440px]">
@@ -41,6 +50,40 @@ function Footer() {
               LunoLab builds websites for businesses that need their online presence
               to do real work — then measures whether it did.
             </p>
+            <address className="flex flex-col gap-1 text-sm not-italic">
+              <span className="text-muted">
+                {SITE.city}, {SITE.region}
+              </span>
+              {telLink() && phoneDisplay() && (
+                <a
+                  href={telLink() as string}
+                  className="w-fit font-semibold text-accent transition-colors hover:text-accent-hover"
+                >
+                  {phoneDisplay()}
+                </a>
+              )}
+              {whatsappLink('Hi LunoLab, I would like to talk about a project.') && (
+                <a
+                  href={
+                    whatsappLink(
+                      'Hi LunoLab, I would like to talk about a project.'
+                    ) as string
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-fit font-semibold text-accent transition-colors hover:text-accent-hover"
+                >
+                  WhatsApp
+                </a>
+              )}
+              <a
+                href={`mailto:${SITE.email}`}
+                className="w-fit break-all text-muted transition-colors hover:text-accent"
+              >
+                {SITE.email}
+              </a>
+            </address>
+
             <div className="mt-1 inline-flex w-fit items-center gap-2 rounded-full border border-accent/30 bg-card px-3 py-1.5">
               <span className="h-2 w-2 shrink-0 rounded-full bg-accent" />
               <span className="text-xs font-medium text-accent">
@@ -55,8 +98,19 @@ function Footer() {
             </h2>
             <ul className="mt-4 grid grid-cols-2 gap-y-2">
               {services.map((service) => (
-                <li key={service} className="text-sm text-body">
-                  {service}
+                <li key={service.label}>
+                  {service.href ? (
+                    <a
+                      href={service.href}
+                      className="inline-flex min-h-9 items-center text-sm text-body transition-colors hover:text-accent"
+                    >
+                      {service.label}
+                    </a>
+                  ) : (
+                    <span className="inline-flex min-h-9 items-center text-sm text-body">
+                      {service.label}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -70,7 +124,7 @@ function Footer() {
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
-                    href={link.href}
+                    href={hrefFor(link.href)}
                     className="inline-flex min-h-9 items-center text-sm text-body transition-colors hover:text-accent"
                   >
                     {link.label}

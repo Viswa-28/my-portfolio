@@ -34,7 +34,7 @@ const steps: { id: string; title: string; detail: string }[] = [
   },
 ]
 
-function Process() {
+function Process({ index }: { index: string }) {
   return (
     <section
       id="process"
@@ -42,10 +42,10 @@ function Process() {
     >
       <div className="mx-auto max-w-[1440px]">
         <Reveal>
-          <SectionHeading index="04">Methodology</SectionHeading>
-          <p className="mt-3 font-heading text-lede font-bold tracking-[-0.03em] text-ink">
+          <SectionHeading index={index}>Methodology</SectionHeading>
+          <h2 className="mt-3 font-heading text-lede font-bold tracking-[-0.03em] text-ink">
             How We Work
-          </p>
+          </h2>
           <p className="mt-3 max-w-xl text-base text-body">
             The same five steps every time, so you always know where a project
             stands.

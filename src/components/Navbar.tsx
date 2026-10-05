@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { motion } from 'motion/react'
 import Logo from './Logo'
 import { prefersReducedMotion } from '../lib/reducedMotion'
@@ -18,6 +19,14 @@ const SECTION_IDS = links.map((l) => l.href.slice(1))
 const reduce = prefersReducedMotion
 
 function Navbar() {
+  // Every nav target is a section of the home page. On a service route a bare
+  // "#about" points at nothing, so it has to become "/#about" — but using
+  // that form on the home page would trigger a full reload instead of a
+  // smooth scroll, so the prefix is conditional.
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
+  const hrefFor = (hash: string) => (isHome ? hash : `/${hash}`)
+
   // Transparent over the hero, then a blurred fill once the page scrolls.
   const [scrolled, setScrolled] = useState(false)
   // Full-screen mobile menu open state (desktop shows the inline pill row).
@@ -35,6 +44,7 @@ function Navbar() {
   // Scrollspy: whichever section crosses a thin band near viewport-centre
   // becomes active. Native IntersectionObserver — no scroll library needed.
   useEffect(() => {
+    if (!isHome) return
     const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
       (el): el is HTMLElement => el !== null
     )
@@ -50,7 +60,7 @@ function Navbar() {
     )
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
-  }, [])
+  }, [isHome])
 
   // Close the mobile menu on Escape, and lock background scroll while open.
   useEffect(() => {
@@ -79,7 +89,7 @@ function Navbar() {
       >
         <nav className="relative z-10 mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 py-3 lg:px-12">
           <a
-            href="#hero"
+            href={isHome ? '#hero' : '/'}
             onClick={() => setOpen(false)}
             className="flex items-center gap-2.5"
           >
@@ -98,11 +108,13 @@ function Navbar() {
           {/* Desktop: floating pill row with an animated active indicator. */}
           <ul className="hidden items-center gap-1 rounded-full border border-line bg-card/90 p-1 backdrop-blur-md xl:flex">
             {links.map((link) => {
-              const isActive = activeId === link.href.slice(1)
+              // Off the home page none of these sections are on screen, so
+              // nothing should read as the current location.
+              const isActive = isHome && activeId === link.href.slice(1)
               return (
                 <li key={link.href} className="relative">
                   <a
-                    href={link.href}
+                    href={hrefFor(link.href)}
                     aria-current={isActive ? 'page' : undefined}
                     className={`relative z-10 inline-flex items-center rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                       isActive
@@ -131,7 +143,7 @@ function Navbar() {
                 one screen; once the page scrolls past it, this becomes the
                 primary and fills in. */}
             <a
-              href="#contact"
+              href={hrefFor('#contact')}
               className={`hidden min-h-11 items-center rounded-full px-5 text-sm font-semibold transition-colors sm:inline-flex ${
                 solid
                   ? 'bg-accent text-on-accent hover:bg-accent-hover'
@@ -201,7 +213,7 @@ function Navbar() {
                 }
               >
                 <a
-                  href={link.href}
+                  href={hrefFor(link.href)}
                   onClick={() => setOpen(false)}
                   className="flex items-center gap-4 py-2 font-heading text-3xl font-extrabold text-ink transition-colors hover:text-accent"
                 >
@@ -214,7 +226,7 @@ function Navbar() {
             ))}
           </ul>
           <a
-            href="#contact"
+            href={hrefFor('#contact')}
             onClick={() => setOpen(false)}
             className="mt-10 inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-semibold text-on-accent transition-colors hover:bg-accent-hover"
           >

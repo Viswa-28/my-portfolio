@@ -61,7 +61,7 @@ function renderSkill(item: LogoItem) {
   )
 }
 
-function Capabilities() {
+function Capabilities({ index }: { index: string }) {
   return (
     <section
       id="about"
@@ -69,7 +69,10 @@ function Capabilities() {
     >
       <div className="mx-auto max-w-[1440px]">
         <Reveal>
-          <SectionHeading index="01">Philosophy &amp; Capability</SectionHeading>
+          <SectionHeading index={index}>Philosophy &amp; Capability</SectionHeading>
+          <h2 className="sr-only">
+            Web design, SEO and digital marketing capabilities in Madurai
+          </h2>
         </Reveal>
 
         <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
@@ -79,7 +82,7 @@ function Capabilities() {
               by="word"
               trigger="scroll"
               highlight="works."
-              text="LunoLab combines web development, design, SEO, and digital marketing to help businesses turn their online presence into something that actually works."
+              text="LunoLab combines web development, design, SEO, and digital marketing to help Madurai and Tamil Nadu businesses turn their online presence into something that actually works."
               className="max-w-2xl font-heading text-lede font-bold tracking-[-0.03em] text-ink"
             />
             <Reveal>

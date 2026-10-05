@@ -9,7 +9,7 @@ import { EASE } from '../lib/motion'
 
 const reduce = prefersReducedMotion
 
-function Work() {
+function Work({ index }: { index: string }) {
   const [filter, setFilter] = useState(ALL)
   const shown =
     filter === ALL
@@ -25,16 +25,20 @@ function Work() {
         <Reveal>
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <SectionHeading index="03">Selected Work</SectionHeading>
-              <p className="mt-3 font-heading text-lede font-bold tracking-[-0.03em] text-ink">
-                Work We've Shipped
-              </p>
+              <SectionHeading index={index}>Selected Work</SectionHeading>
+              <h2 className="mt-3 font-heading text-lede font-bold tracking-[-0.03em] text-ink">
+                Websites We've Built for Tamil Nadu Businesses
+              </h2>
               <p className="mt-3 max-w-lg text-base text-body">
                 Every project below is live. The link on each card goes straight
                 to the running site.
               </p>
             </div>
 
+            {/* Five filter pills for four projects wrapped to three rows on a
+                phone and pushed the first project further down the page.
+                Filtering only earns its space once there is enough to filter. */}
+            {projects.length > 6 && (
             <ul className="flex flex-wrap items-center gap-2">
               {categories.map((category) => {
                 const isActive = filter === category
@@ -56,6 +60,7 @@ function Work() {
                 )
               })}
             </ul>
+            )}
           </div>
         </Reveal>
 

@@ -94,7 +94,7 @@ function Hero() {
             text="We turn ideas into presence,"
             delay={0.05}
             className="block text-ink"
-          />
+          />{' '}
           <SplitText
             as="span"
             by="word"
@@ -108,9 +108,10 @@ function Hero() {
           {...rise(0.36)}
           className="mt-6 max-w-2xl text-base text-body lg:text-lg"
         >
-          LunoLab is a digital growth studio. We design, build and measure the
-          websites, search and social that turn attention into enquiries — for
-          businesses that want their online presence to earn its keep.
+          LunoLab is a digital growth studio in Madurai. We design, build and
+          measure the websites, search and social that turn attention into
+          enquiries — for businesses across Tamil Nadu that want their online
+          presence to earn its keep.
         </motion.p>
 
         <motion.div
@@ -159,9 +160,9 @@ function Hero() {
               <span className="font-heading text-xs font-bold text-accent/70">
                 {stage.step}
               </span>
-              <h2 className="font-heading text-sm font-bold tracking-[0.12em] text-ink uppercase">
+              <span className="font-heading text-sm font-bold tracking-[0.12em] text-ink uppercase">
                 {stage.title}
-              </h2>
+              </span>
               {/* Echoes the tagline's own notation, attached to the stage it
                   leads out of rather than adrift in the column gutter. Always
                   rendered (just hidden on the last stage) so every column

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -7,77 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0B0B0F" />
     <meta name="color-scheme" content="dark" />
-    <meta
-      name="description"
-      content="LunoLab is a digital growth studio run by Viswa — websites, SEO, social media and analytics that turn a business's online presence into enquiries. Ideas → presence → results."
-    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <title>LunoLab — Digital Growth Studio</title>
-
-    <!-- Open Graph / link previews (LinkedIn, etc.) -->
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="LunoLab — Digital Growth Studio"
-    />
-    <meta
-      property="og:description"
-      content="Websites, SEO, social media and analytics that help businesses grow. Ideas → presence → results."
-    />
-    <!-- TODO once deployed: set og:url to the live domain, and add og:image
-         (1200x630 PNG/JPG) — no image asset exists yet, so it's omitted
-         rather than pointing at something broken. -->
-    <meta name="twitter:card" content="summary" />
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Person",
-            "@id": "#viswa",
-            "name": "Viswa",
-            "jobTitle": "Web Developer & Digital Growth Specialist",
-            "worksFor": { "@id": "#lunolab" },
-            "email": "mailto:viswaa288@gmail.com",
-            "sameAs": [
-              "https://www.linkedin.com/in/viswaa28/",
-              "https://github.com/Viswa-28/"
-            ],
-            "knowsAbout": [
-              "Web Development",
-              "Search Engine Optimization",
-              "Social Media Strategy",
-              "Digital Marketing",
-              "Web Analytics"
-            ]
-          },
-          {
-            "@type": "ProfessionalService",
-            "@id": "#lunolab",
-            "name": "LunoLab",
-            "alternateName": "LunoLab Digital Growth Studio",
-            "slogan": "Ideas → Presence → Results",
-            "founder": { "@id": "#viswa" },
-            "areaServed": "IN",
-            "email": "mailto:viswaa288@gmail.com",
-            "description": "Websites, SEO, social media, digital growth, and analytics reporting for growing businesses."
-          },
-          {
-            "@type": "WebSite",
-            "name": "LunoLab",
-            "inLanguage": "en",
-            "publisher": { "@id": "#lunolab" },
-            "author": { "@id": "#viswa" }
-          }
-        ]
-      }
-    </script>
+    <!-- Title, description, canonical, Open Graph and JSON-LD are rendered
+         per route by src/components/Seo.tsx and baked into each page's static
+         HTML at build time. Nothing page-specific belongs here. -->
   </head>
   <body>
     <div id="root"></div>

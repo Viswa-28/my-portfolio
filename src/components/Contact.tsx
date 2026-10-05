@@ -1,7 +1,11 @@
 import Reveal from './Reveal'
 import ContactForm from './ContactForm'
+import { SITE, whatsappLink, telLink, phoneDisplay } from '../lib/site'
 
-const EMAIL = 'viswaa288@gmail.com'
+const EMAIL = SITE.email
+const WA = whatsappLink("Hi LunoLab, I'd like to talk about a project.")
+const TEL = telLink()
+const PHONE = phoneDisplay()
 
 function Contact() {
   return (
@@ -30,6 +34,9 @@ function Contact() {
                   Have an idea or a business that needs a better digital
                   presence?
                 </h2>
+                <p className="mt-3 text-sm font-semibold tracking-[0.12em] text-muted uppercase">
+                  Madurai, Tamil Nadu · Working with clients across India
+                </p>
                 <p className="mt-4 max-w-md text-base text-body lg:text-lg">
                   Tell us what you're trying to achieve and we'll work out what
                   actually makes sense.
@@ -38,6 +45,39 @@ function Contact() {
                 <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-xs font-medium text-muted">
                   <span className="text-accent">✉</span>
                   <span>Direct reply within 24 hours</span>
+                </div>
+
+                {/* WhatsApp leads: most visitors arrive on a phone from an
+                    Instagram ad, and a message is a far smaller ask than a
+                    form at that moment. The form stays for longer briefs. */}
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  {WA && (
+                    <a
+                      href={WA}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-6 text-base font-semibold text-on-accent transition-colors hover:bg-accent-hover"
+                    >
+                      Message on WhatsApp
+                      <span
+                        aria-hidden="true"
+                        className="transition-transform duration-300 group-hover:translate-x-1"
+                      >
+                        →
+                      </span>
+                    </a>
+                  )}
+                  {TEL && PHONE && (
+                    <a
+                      href={TEL}
+                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-line bg-surface px-6 text-base font-semibold text-ink transition-colors hover:border-accent/50 hover:text-accent"
+                    >
+                      <span aria-hidden="true" className="text-accent">
+                        ☎
+                      </span>
+                      {PHONE}
+                    </a>
+                  )}
                 </div>
 
                 <a

@@ -60,7 +60,7 @@ const services: Service[] = [
   },
 ]
 
-function Services() {
+function Services({ index }: { index: string }) {
   return (
     <section
       id="services"
@@ -70,10 +70,10 @@ function Services() {
         <Reveal>
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <SectionHeading index="02">Core Expertise</SectionHeading>
-              <p className="mt-3 font-heading text-lede font-bold tracking-[-0.03em] text-ink">
-                What We Do
-              </p>
+              <SectionHeading index={index}>Core Expertise</SectionHeading>
+              <h2 className="mt-3 font-heading text-lede font-bold tracking-[-0.03em] text-ink">
+                Digital Marketing &amp; Web Design Services in Madurai
+              </h2>
             </div>
             <p className="max-w-sm text-base text-body">
               Careful engineering paired with marketing you can actually measure.

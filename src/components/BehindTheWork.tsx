@@ -1,7 +1,7 @@
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
 
-function BehindTheWork() {
+function BehindTheWork({ index }: { index: string }) {
   return (
     <section
       id="story"
@@ -17,7 +17,7 @@ function BehindTheWork() {
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-4">
               <Reveal>
-                <SectionHeading index="05">Behind the Work</SectionHeading>
+                <SectionHeading index={index}>Behind the Work</SectionHeading>
                 <p className="mt-4 h-1 w-16 rounded-full bg-accent" />
                 <p className="mt-4 text-sm text-muted">
                   The founder behind the studio.
