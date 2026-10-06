@@ -34,3 +34,9 @@ ezgif-*.zip
 ezgif-*.zip
 about-frames-*.zip
 scroll animation clips/
+
+# Next.js build output
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
