@@ -1,84 +1,78 @@
-import Seo from '../components/Seo'
-import Hero from '../components/Hero'
-import Capabilities from '../components/Capabilities'
-import Services from '../components/Services'
-import Work from '../components/Work'
-import Process from '../components/Process'
-import Pricing from '../components/Pricing'
-import Testimonials from '../components/Testimonials'
-import BehindTheWork from '../components/BehindTheWork'
-import Contact from '../components/Contact'
-import { testimonials } from '../data/testimonials'
-import { DOMAIN } from '../lib/site'
+import { Head } from 'vite-react-ssg'
+import markUrl from '../assets/lunolab-mark.png'
 
-// Section numbering lives here rather than in each component, so reordering
-// (or Testimonials rendering nothing) can't leave a gap in the sequence.
-const order = [
-  'work',
-  'about',
-  'services',
-  'process',
-  'pricing',
-  ...(testimonials.length > 0 ? ['testimonials'] : []),
-  'story',
-] as const
-
-const n = (id: (typeof order)[number]) =>
-  String(order.indexOf(id) + 1).padStart(2, '0')
+// Deliberately sparse. The sequence needs real scroll distance to play
+// across, so the sections below establish the rhythm and the readable-over-
+// sky treatment; the content itself gets rebuilt from here.
+const sections = [
+  {
+    kicker: 'Ideas',
+    title: 'It starts with the business, not the brief.',
+    body: 'We work out what is actually holding a digital presence back before anyone opens a design tool.',
+  },
+  {
+    kicker: 'Presence',
+    title: 'The site, search and social as one system.',
+    body: 'Designed and built together, so the parts point at the same outcome instead of competing.',
+  },
+  {
+    kicker: 'Results',
+    title: 'Measured against enquiries, not impressions.',
+    body: 'Traffic and engagement reported in plain language, and used to decide what changes next.',
+  },
+]
 
 function Home() {
   return (
     <>
-      <Seo
-        path="/"
-        title="Digital Growth Studio in Madurai | Web Design & SEO | LunoLab"
-        description="LunoLab is a digital growth studio in Madurai building websites, SEO and social media for Tamil Nadu businesses. Ideas → presence → results. Reply within 24 hours."
-        schema={[
-          {
-            '@type': 'FAQPage',
-            '@id': `${DOMAIN}/#faq`,
-            mainEntity: [
-              {
-                '@type': 'Question',
-                name: 'Where is LunoLab based?',
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'LunoLab is a digital growth studio based in Madurai, Tamil Nadu, working with businesses across Tamil Nadu and the rest of India.',
-                },
-              },
-              {
-                '@type': 'Question',
-                name: 'What services does LunoLab offer?',
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'Web design and development, SEO and local search visibility, social media strategy, digital marketing, and analytics and reporting.',
-                },
-              },
-              {
-                '@type': 'Question',
-                name: 'How quickly does LunoLab reply to an enquiry?',
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'Within 24 hours, directly from the founder.',
-                },
-              },
-            ],
-          },
-        ]}
-      />
-      <Hero />
-      {/* Work sits directly under the hero on purpose. Instagram ad traffic
-          is cold and mobile: the portfolio used to be 5.2 screens down, past
-          two card grids, which is well past where that visitor leaves. Proof
-          first, explanation after. */}
-      <Work index={n('work')} />
-      <Capabilities index={n('about')} />
-      <Services index={n('services')} />
-      <Process index={n('process')} />
-      <Pricing index={n('pricing')} />
-      <Testimonials index={testimonials.length > 0 ? n('testimonials') : '00'} />
-      <BehindTheWork index={n('story')} />
-      <Contact />
+      <Head>
+        <title>LunoLab — Digital Growth Studio</title>
+        <meta
+          name="description"
+          content="LunoLab is a digital growth studio in Madurai building websites, SEO and social media for Tamil Nadu businesses."
+        />
+        <meta name="theme-color" content="#f1f6fb" />
+      </Head>
+
+      <section className="read-scrim relative isolate flex min-h-svh flex-col justify-center px-6 py-24 lg:px-12">
+        <div className="mx-auto w-full max-w-[1200px]">
+          <div className="flex items-center gap-3">
+            <img src={markUrl} alt="" aria-hidden="true" width={144} height={144} className="h-10 w-10" />
+            <span className="font-heading text-lg font-extrabold tracking-tight text-ink">
+              LUNO<span className="text-accent">LAB</span>
+            </span>
+          </div>
+
+          <h1 className="mt-10 max-w-4xl font-heading text-hero font-extrabold tracking-[-0.03em] text-ink">
+            We turn ideas into presence, and presence into results.
+          </h1>
+
+          <p className="mt-8 max-w-xl text-lg text-body">
+            A digital growth studio in Madurai, working with businesses across
+            Tamil Nadu.
+          </p>
+
+          <p className="mt-16 text-xs font-semibold tracking-[0.2em] text-muted uppercase">
+            Scroll
+          </p>
+        </div>
+      </section>
+
+      {sections.map((s) => (
+        <section key={s.kicker} className="flex min-h-svh items-center px-6 py-24 lg:px-12">
+          <div className="mx-auto w-full max-w-[1200px]">
+            <div className="max-w-2xl rounded-panel border border-line bg-card/80 p-8 backdrop-blur-md lg:p-12">
+              <p className="font-heading text-xs font-bold tracking-[0.2em] text-accent uppercase">
+                {s.kicker}
+              </p>
+              <h2 className="mt-4 font-heading text-huge font-extrabold tracking-[-0.03em] text-ink">
+                {s.title}
+              </h2>
+              <p className="mt-5 text-lg text-body">{s.body}</p>
+            </div>
+          </div>
+        </section>
+      ))}
     </>
   )
 }

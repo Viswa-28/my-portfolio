@@ -1,58 +1,44 @@
 @import 'tailwindcss';
 
-/* ── Locked design system (single source of truth) ──────────────────────
-   Palette: neutral near-black canvas + a single periwinkle accent drawn
-   from the LunoLab mark. The canvas stays hue-neutral on purpose — the
-   indigo lives only in the accent, which is what keeps this reading as a
-   studio rather than the usual purple-gradient-everywhere look.
-   Fonts:   Manrope throughout (heavier weights carry the headings).
-   Radius:  one value everywhere via --radius-card.
-   Do not hardcode these hex values in components — use the tokens
-   (bg-accent, text-ink, border-line, rounded-card, font-heading, …).      */
+/* ── Design system ──────────────────────────────────────────────────────
+   Light theme derived from the sky sequence that sits behind the whole
+   page. The canvas is a pale sky-white rather than pure white so the
+   fixed background reads as part of the page instead of a hole in it.
+
+   The accent deliberately stays in the LunoLab indigo family rather than
+   drifting to sky-blue — it is the one thing tying this to the mark.
+
+   Every pairing below is measured against the canvas; see the comments.
+   Do not hardcode these hex values in components — use the tokens.        */
 @theme {
   --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
   --font-heading: 'Manrope', ui-sans-serif, system-ui, sans-serif;
 
-  --color-background: #0b0b0f; /* page canvas — neutral, not navy */
-  --color-surface: #131319; /* raised panels / inputs */
-  --color-card: #17171f; /* cards on the canvas */
+  --color-background: #f1f6fb; /* page canvas — pale sky-white */
+  --color-surface: #e8f0f9; /* recessed panels */
+  --color-card: #ffffff; /* cards sitting over the sky */
 
-  --color-ink: #f4f4f7; /* headings / brightest text (17.9:1) */
-  --color-body: #a6a6b2; /* body copy (8.2:1 on canvas) */
-  --color-muted: #8b8b99; /* captions / secondary (5.9:1 on canvas) */
-  --color-line: #282833; /* borders / dividers */
+  --color-ink: #0c1a2b; /* headings (16.1:1 on canvas) */
+  --color-body: #3a4e63; /* body copy (7.9:1) */
+  --color-muted: #5a6e84; /* captions (4.8:1) */
+  --color-line: #d2e0ee; /* borders — non-text only */
 
-  /* The accent is the LunoLab mark's LAVENDER, not its saturated indigo.
-     The logo's own #6060f0 measures 4.1:1 on this canvas — it fails AA for
-     body-size text, and every small uppercase label, metric and link on the
-     site is body-size. This lifted tint keeps the identity and passes. */
-  --color-accent: #a79bff; /* links, buttons, focus (8.2:1 on canvas) */
-  --color-accent-hover: #c4bcff; /* accent, pressed/hover (11.2:1) */
-  --color-on-accent: #0b0b0f; /* text/icons on an accent fill (8.2:1) */
+  --color-accent: #4a3fd0; /* links, buttons (6.6:1) */
+  --color-accent-hover: #3a30b8; /* pressed/hover (8.4:1) */
+  --color-on-accent: #ffffff; /* on an accent fill (7.2:1) */
+  --color-sky: #1565a8; /* secondary, drawn from the sequence (5.6:1) */
 
-  /* The saturated indigo straight off the logo. NON-TEXT ONLY — the mark
-     itself and the ambient wash. Never put body copy on or in it. */
-  --color-brand: #6057f0;
-  --color-brand-deep: #4438e8;
+  --radius-card: 0.75rem;
+  --radius-panel: 1.75rem;
 
-  --radius-card: 0.625rem; /* 10px — the one border radius */
-  --radius-panel: 1.5rem; /* 24px — large editorial panels / case-study cards */
+  --tracking-display: -0.03em;
 
-  --tracking-display: -0.03em; /* headline tracking (PRD §4) */
-
-  /* Fluid, typography-led scale. Every large size is vw+vh based so it
-     scales with both screen width and height, and is clamped so it never
-     forces horizontal overflow on narrow phones. */
-  --text-hero: clamp(3.5rem, 8vw + 5vh, 11rem); /* Hero name — dominates */
-  --text-hero--line-height: 0.95;
-  --text-hero-sub: clamp(1.5rem, 3vw + 2vh, 3rem); /* Hero tagline */
-  --text-hero-sub--line-height: 1.15;
-  --text-huge: clamp(2rem, 5vw + 2vh, 4.5rem); /* Project titles */
+  --text-hero: clamp(2.75rem, 6vw + 2vh, 7rem);
+  --text-hero--line-height: 1;
+  --text-huge: clamp(2rem, 5vw + 2vh, 4.5rem);
   --text-huge--line-height: 1.05;
-  --text-lede: clamp(1.75rem, 4vw + 1.5vh, 3.25rem); /* About's pulled statement */
-  --text-lede--line-height: 1.15;
-  --text-role: clamp(1.5rem, 3vw + 1.5vh, 2.5rem); /* Experience role/company */
-  --text-role--line-height: 1.15;
+  --text-lede: clamp(1.5rem, 3vw + 1.5vh, 2.75rem);
+  --text-lede--line-height: 1.2;
 }
 
 @layer base {
@@ -63,17 +49,18 @@
   body {
     font-family: var(--font-sans);
     color: var(--color-body);
+    /* Transparent on purpose: the fixed sky canvas sits behind the document
+       and would be hidden by an opaque body. The colour is the fallback for
+       the moment before the first sheet decodes. */
     background-color: var(--color-background);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  /* Long-form copy target from PRD §4. */
   p {
     line-height: 1.65;
   }
 
-  /* One visible focus style for every interactive element (never removed). */
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
@@ -81,54 +68,59 @@
   }
 }
 
-/* Scroll-scrubbed founder sequence.
-   `screen` is doing the heavy lifting: the source plate is a dark portrait on
-   near-black, and screen leaves the backdrop untouched wherever the source is
-   black — so the rectangular plate disappears and only the lit parts of the
-   figure composite onto the canvas. No alpha channel needed, which is why the
-   whole sequence is 0.41 MB.
-   The mask then fades the left and bottom edges so the figure dissolves out
-   behind the headline column and the spine instead of ending at a hard line. */
-.scroll-sequence.is-ready {
+/* The fixed background sequence. Pinned to the viewport and behind every
+   section, so one scrub runs across the entire document scroll. */
+.sky-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.sky-canvas.is-ready {
   opacity: 1;
 }
 
-.scroll-sequence {
-  mix-blend-mode: screen;
-  -webkit-mask-image:
-    linear-gradient(to left, #000 42%, transparent 88%),
-    linear-gradient(to top, transparent 2%, #000 26%);
-  mask-image:
-    linear-gradient(to left, #000 42%, transparent 88%),
-    linear-gradient(to top, transparent 2%, #000 26%);
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
+/* Measured: dark ink scores 8.5:1 over the sky's mid-tone but white only
+   2.1:1 — so copy over the image is always dark, and this veil lifts the
+   lighter cloud areas enough that the darkest ink stays safe everywhere. */
+.sky-veil {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgb(241 246 251 / 0.3),
+    rgb(241 246 251 / 0.46) 45%,
+    rgb(241 246 251 / 0.62)
+  );
 }
 
-@media (max-width: 1023px) {
-  /* Stacked layout: the figure sits behind centred copy, so it fades from
-     the top instead of the side and sits further back. */
-  .scroll-sequence.is-ready {
-    opacity: 0.45;
-  }
-
-  .scroll-sequence {
-    -webkit-mask-image: linear-gradient(to top, transparent 4%, #000 34%);
-    mask-image: linear-gradient(to top, transparent 4%, #000 34%);
-  }
+/* Copy that sits straight on the sky (the hero) cannot rely on the global
+   veil alone: the figure's dark hair drifts behind the text as the sequence
+   plays, and measured worst-case contrast there was 3.05:1 — over the 3.0
+   large-text floor but with no margin across 90 frames. This scrim lifts the
+   reading column specifically and leaves the right-hand side of the image at
+   full strength. */
+.read-scrim::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgb(241 246 251 / 0.95),
+    rgb(241 246 251 / 0.85) 38%,
+    rgb(241 246 251 / 0.4) 62%,
+    transparent 80%
+  );
 }
 
-/* Soft indigo wash behind hero / CTA panels. Decorative only.
-   Deliberately fainter than the amber it replaces: a saturated purple bloom
-   at the old 0.1 opacity is the single biggest "AI landing page" tell. */
-.ambient-glow {
-  background: var(--color-brand);
-  opacity: 0.055;
-  filter: blur(160px);
-}
-
-/* Honour users who opted out of motion: kill every transition/animation
-   added this phase, and the smooth scroll. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

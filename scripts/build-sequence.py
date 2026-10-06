@@ -1,90 +1,84 @@
-"""Pack the founder-turn frame sequence into WebP sprite sheets.
+"""Pack the sky-fall sequence into WebP sprite sheets — two variants.
 
-Source: ezgif-44f71bf1da462dd9-jpg.zip (300 JPEG frames, 720x1280).
-Output: public/sequence/turn-{n}.webp + a small JSON manifest.
+Source: ezgif-1057b104152b5404-jpg.zip (300 JPEG frames, 1080x1920 portrait).
+
+Why two variants. A 9:16 plate covered into a 16:10 desktop viewport shows
+only 35% of the frame height — that is the "too zoomed" problem, and it is
+caused by the aspect mismatch, not by resolution. So desktop gets a real
+landscape crop crafted here instead of one the browser improvises at runtime.
+
+And the first build downscaled to 540px, which the browser then upscaled 5.3x
+at DPR 2 — that is the "quality is bad" problem. Both sets now stay at or
+near their display size.
+
+  desktop  1080x675 (16:10), native width   -> 1.33x at a 1440 viewport
+  mobile    640x1138 portrait               -> 1.22x at 390 CSS px, DPR 2
 
 Run:  python scripts/build-sequence.py
-
-Why sheets rather than 300 files: 300 requests is what would actually hurt
-on mobile, not the bytes. Three sheets is 0.4 MB and three requests, and
-each sheet stays under 4096px so older mobile GPUs can texture it.
 """
 import io, json, math, zipfile
 from pathlib import Path
 from PIL import Image
 
-SRC = 'ezgif-44f71bf1da462dd9-jpg.zip'
+SRC = 'ezgif-1057b104152b5404-jpg.zip'
 OUT = Path('public/sequence')
 SOURCE_FRAMES = 300
-# Frame-difference analysis puts all the real movement between 55 and 245:
-# 1-50 is a static back-view and 250-300 is a static front-view. Sampling the
-# full range spent half the scroll on frames where nothing happens.
-START, END = 55, 245
-FRAMES = 90          # plenty for a scrub; 300 is imperceptibly smoother
-WIDTH = 360          # it is a dimmed background layer, not a hero image
-COLS, ROWS = 6, 5    # 30 per sheet -> 3 sheets, 2160x2880 each
-CROP_BOTTOM = 0.10   # removes the AI-generation watermark at ~91% height
-QUALITY = 72
-BLACK_FLOOR = 28     # see crush() — everything below this becomes true black
 
-def crush(im):
-    """Force the plate background to true black.
+# Vertical anchor of the landscape crop, as a fraction of source height.
+# 0.24 keeps the sun flare, the whole head and the full arm span in shot.
+CROP_TOP = 0.24
 
-    The canvas composites this with mix-blend-mode: screen, which leaves the
-    backdrop untouched only where the source is exactly 0. The source plate is
-    a vignetted 7-21 grey, which screens to ~31 against the #0b0b0f canvas and
-    shows up as a visible rectangle. Rescaling so everything under BLACK_FLOOR
-    clips to zero makes the plate genuinely disappear, leaving just the lit
-    parts of the figure. Shadow detail in the shirt is lost on purpose.
-    """
-    lut = [0 if v <= BLACK_FLOOR else round((v - BLACK_FLOOR) * 255 / (255 - BLACK_FLOOR))
-           for v in range(256)]
-    return im.point(lut * 3)
-
+VARIANTS = {
+    'wide':   dict(frames=72, width=1080, quality=68, landscape=True,  cols=3, rows=5),
+    'narrow': dict(frames=60, width=640,  quality=70, landscape=False, cols=5, rows=3),
+}
 
 OUT.mkdir(parents=True, exist_ok=True)
 z = zipfile.ZipFile(SRC)
-span = END - START
-step = span / (FRAMES - 1)
+manifest = {}
 
-frames = []
-for i in range(FRAMES):
-    n = min(SOURCE_FRAMES, max(1, START + round(i * step)))
-    im = Image.open(io.BytesIO(z.read(f'ezgif-frame-{n:03d}.jpg'))).convert('RGB')
-    w, h = im.size
-    im = im.crop((0, 0, w, int(h * (1 - CROP_BOTTOM))))
-    im = im.resize((WIDTH, round(im.size[1] * WIDTH / im.size[0])), Image.LANCZOS)
-    frames.append(crush(im))
+for name, cfg in VARIANTS.items():
+    step = SOURCE_FRAMES / cfg['frames']
+    frames = []
+    for i in range(cfg['frames']):
+        n = min(SOURCE_FRAMES, int(i * step) + 1)
+        im = Image.open(io.BytesIO(z.read(f'ezgif-frame-{n:03d}.jpg'))).convert('RGB')
+        if cfg['landscape']:
+            W, H = im.size
+            ch = round(W * 10 / 16)
+            top = int(H * CROP_TOP)
+            im = im.crop((0, top, W, top + ch))
+        w = cfg['width']
+        frames.append(im.resize((w, round(im.size[1] * w / im.size[0])), Image.LANCZOS))
 
-fw, fh = frames[0].size
-per = COLS * ROWS
-sheets = math.ceil(FRAMES / per)
-total = 0
+    fw, fh = frames[0].size
+    per = cfg['cols'] * cfg['rows']
+    sheets = math.ceil(cfg['frames'] / per)
+    total = 0
 
-for s in range(sheets):
-    chunk = frames[s * per:(s + 1) * per]
-    rows = math.ceil(len(chunk) / COLS)
-    sheet = Image.new('RGB', (fw * COLS, fh * rows), (0, 0, 0))
-    for i, im in enumerate(chunk):
-        sheet.paste(im, ((i % COLS) * fw, (i // COLS) * fh))
-    path = OUT / f'turn-{s}.webp'
-    sheet.save(path, 'WEBP', quality=QUALITY, method=6)
-    total += path.stat().st_size
-    print(f'  {path}  {sheet.size[0]}x{sheet.size[1]}  {path.stat().st_size/1024:.0f} KB')
+    for s in range(sheets):
+        chunk = frames[s * per:(s + 1) * per]
+        rows = math.ceil(len(chunk) / cfg['cols'])
+        sheet = Image.new('RGB', (fw * cfg['cols'], fh * rows))
+        for i, im in enumerate(chunk):
+            sheet.paste(im, ((i % cfg['cols']) * fw, (i // cfg['cols']) * fh))
+        path = OUT / f'sky-{name}-{s}.webp'
+        sheet.save(path, 'WEBP', quality=cfg['quality'], method=6)
+        total += path.stat().st_size
+        assert max(sheet.size) <= 4096, f'{path} exceeds the 4096px texture limit'
 
-manifest = {
-    'frames': FRAMES,
-    'frameWidth': fw,
-    'frameHeight': fh,
-    'cols': COLS,
-    'rows': ROWS,
-    'perSheet': per,
-    'sheets': [f'/sequence/turn-{s}.webp' for s in range(sheets)],
-}
+    frames[0].save(OUT / f'sky-{name}-poster.webp', 'WEBP', quality=74, method=6)
+
+    manifest[name] = {
+        'frames': cfg['frames'],
+        'frameWidth': fw,
+        'frameHeight': fh,
+        'cols': cfg['cols'],
+        'perSheet': per,
+        'sheets': [f'/sequence/sky-{name}-{s}.webp' for s in range(sheets)],
+        'poster': f'/sequence/sky-{name}-poster.webp',
+    }
+    print(f'{name:>7}: {cfg["frames"]} frames  {fw}x{fh}  {sheets} sheets  {total/1024/1024:.2f} MB')
+
 (OUT / 'manifest.json').write_text(json.dumps(manifest, indent=2))
-
-# A single still for reduced-motion users and as the poster before load.
-frames[-1].save(OUT / 'turn-poster.webp', 'WEBP', quality=78, method=6)
-
-print(f'\n{FRAMES} frames, {sheets} sheets, {total/1024/1024:.2f} MB total')
-print(json.dumps(manifest, indent=2))
+print('\nEach device downloads one variant only.')

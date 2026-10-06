@@ -1,13 +1,31 @@
 {
-  "frames": 90,
-  "frameWidth": 360,
-  "frameHeight": 576,
-  "cols": 6,
-  "rows": 5,
-  "perSheet": 30,
-  "sheets": [
-    "/sequence/turn-0.webp",
-    "/sequence/turn-1.webp",
-    "/sequence/turn-2.webp"
-  ]
+  "wide": {
+    "frames": 72,
+    "frameWidth": 1080,
+    "frameHeight": 675,
+    "cols": 3,
+    "perSheet": 15,
+    "sheets": [
+      "/sequence/sky-wide-0.webp",
+      "/sequence/sky-wide-1.webp",
+      "/sequence/sky-wide-2.webp",
+      "/sequence/sky-wide-3.webp",
+      "/sequence/sky-wide-4.webp"
+    ],
+    "poster": "/sequence/sky-wide-poster.webp"
+  },
+  "narrow": {
+    "frames": 60,
+    "frameWidth": 640,
+    "frameHeight": 1138,
+    "cols": 5,
+    "perSheet": 15,
+    "sheets": [
+      "/sequence/sky-narrow-0.webp",
+      "/sequence/sky-narrow-1.webp",
+      "/sequence/sky-narrow-2.webp",
+      "/sequence/sky-narrow-3.webp"
+    ],
+    "poster": "/sequence/sky-narrow-poster.webp"
+  }
 }
