@@ -1,0 +1,26 @@
+{
+  "name": "footer",
+  "desktop": {
+    "frameCount": 120,
+    "width": 1280,
+    "height": 720,
+    "fps": 24,
+    "dir": "/frames/footer/desktop",
+    "poster": {
+      "webp": "/frames/footer/desktop/poster.webp",
+      "avif": "/frames/footer/desktop/poster.avif"
+    }
+  },
+  "mobile": {
+    "frameCount": 72,
+    "width": 640,
+    "height": 1137,
+    "fps": 24,
+    "dir": "/frames/footer/mobile",
+    "poster": {
+      "webp": "/frames/footer/mobile/poster.webp",
+      "avif": "/frames/footer/mobile/poster.avif"
+    }
+  },
+  "endColor": "#865d4d"
+}

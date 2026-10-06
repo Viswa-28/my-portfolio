@@ -1,0 +1,26 @@
+{
+  "name": "hero",
+  "desktop": {
+    "frameCount": 120,
+    "width": 1280,
+    "height": 720,
+    "fps": 24,
+    "dir": "/frames/hero/desktop",
+    "poster": {
+      "webp": "/frames/hero/desktop/poster.webp",
+      "avif": "/frames/hero/desktop/poster.avif"
+    }
+  },
+  "mobile": {
+    "frameCount": 72,
+    "width": 640,
+    "height": 1138,
+    "fps": 24,
+    "dir": "/frames/hero/mobile",
+    "poster": {
+      "webp": "/frames/hero/mobile/poster.webp",
+      "avif": "/frames/hero/mobile/poster.avif"
+    }
+  },
+  "endColor": "#4c384e"
+}

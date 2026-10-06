@@ -30,3 +30,7 @@ dist-ssr
 *.sw?
 # Source frame archives — large, and the generated sheets are what ship.
 ezgif-*.zip
+
+ezgif-*.zip
+about-frames-*.zip
+scroll animation clips/

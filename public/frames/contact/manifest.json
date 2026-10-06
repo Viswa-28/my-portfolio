@@ -1,0 +1,26 @@
+{
+  "name": "contact",
+  "desktop": {
+    "frameCount": 120,
+    "width": 1280,
+    "height": 720,
+    "fps": 24,
+    "dir": "/frames/contact/desktop",
+    "poster": {
+      "webp": "/frames/contact/desktop/poster.webp",
+      "avif": "/frames/contact/desktop/poster.avif"
+    }
+  },
+  "mobile": {
+    "frameCount": 72,
+    "width": 640,
+    "height": 1137,
+    "fps": 24,
+    "dir": "/frames/contact/mobile",
+    "poster": {
+      "webp": "/frames/contact/mobile/poster.webp",
+      "avif": "/frames/contact/mobile/poster.avif"
+    }
+  },
+  "endColor": "#473244"
+}

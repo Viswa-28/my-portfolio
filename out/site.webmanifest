@@ -1,0 +1,12 @@
+{
+  "name": "Viswa — Luno Lab",
+  "short_name": "Luno Lab",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#14122B",
+  "theme_color": "#14122B",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

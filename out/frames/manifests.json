@@ -1,0 +1,158 @@
+{
+  "hero": {
+    "name": "hero",
+    "desktop": {
+      "frameCount": 120,
+      "width": 1280,
+      "height": 720,
+      "fps": 24,
+      "dir": "/frames/hero/desktop",
+      "poster": {
+        "webp": "/frames/hero/desktop/poster.webp",
+        "avif": "/frames/hero/desktop/poster.avif"
+      }
+    },
+    "mobile": {
+      "frameCount": 72,
+      "width": 640,
+      "height": 1138,
+      "fps": 24,
+      "dir": "/frames/hero/mobile",
+      "poster": {
+        "webp": "/frames/hero/mobile/poster.webp",
+        "avif": "/frames/hero/mobile/poster.avif"
+      }
+    },
+    "endColor": "#4c384e"
+  },
+  "about": {
+    "name": "about",
+    "desktop": {
+      "frameCount": 206,
+      "width": 1920,
+      "height": 1080,
+      "fps": 24,
+      "dir": "/frames/about/desktop",
+      "poster": {
+        "webp": "/frames/about/desktop/poster.webp",
+        "avif": "/frames/about/desktop/poster.avif"
+      }
+    },
+    "mobile": {
+      "frameCount": 72,
+      "width": 640,
+      "height": 1137,
+      "fps": 24,
+      "dir": "/frames/about/mobile",
+      "poster": {
+        "webp": "/frames/about/mobile/poster.webp",
+        "avif": "/frames/about/mobile/poster.avif"
+      }
+    },
+    "endColor": "#51516f"
+  },
+  "services": {
+    "name": "services",
+    "desktop": {
+      "frameCount": 120,
+      "width": 1280,
+      "height": 720,
+      "fps": 24,
+      "dir": "/frames/services/desktop",
+      "poster": {
+        "webp": "/frames/services/desktop/poster.webp",
+        "avif": "/frames/services/desktop/poster.avif"
+      }
+    },
+    "mobile": {
+      "frameCount": 72,
+      "width": 640,
+      "height": 1137,
+      "fps": 24,
+      "dir": "/frames/services/mobile",
+      "poster": {
+        "webp": "/frames/services/mobile/poster.webp",
+        "avif": "/frames/services/mobile/poster.avif"
+      }
+    },
+    "endColor": "#615167"
+  },
+  "testimonials": {
+    "name": "testimonials",
+    "desktop": {
+      "frameCount": 120,
+      "width": 1280,
+      "height": 720,
+      "fps": 24,
+      "dir": "/frames/testimonials/desktop",
+      "poster": {
+        "webp": "/frames/testimonials/desktop/poster.webp",
+        "avif": "/frames/testimonials/desktop/poster.avif"
+      }
+    },
+    "mobile": {
+      "frameCount": 72,
+      "width": 640,
+      "height": 1137,
+      "fps": 24,
+      "dir": "/frames/testimonials/mobile",
+      "poster": {
+        "webp": "/frames/testimonials/mobile/poster.webp",
+        "avif": "/frames/testimonials/mobile/poster.avif"
+      }
+    },
+    "endColor": "#bf92eb"
+  },
+  "contact": {
+    "name": "contact",
+    "desktop": {
+      "frameCount": 120,
+      "width": 1280,
+      "height": 720,
+      "fps": 24,
+      "dir": "/frames/contact/desktop",
+      "poster": {
+        "webp": "/frames/contact/desktop/poster.webp",
+        "avif": "/frames/contact/desktop/poster.avif"
+      }
+    },
+    "mobile": {
+      "frameCount": 72,
+      "width": 640,
+      "height": 1137,
+      "fps": 24,
+      "dir": "/frames/contact/mobile",
+      "poster": {
+        "webp": "/frames/contact/mobile/poster.webp",
+        "avif": "/frames/contact/mobile/poster.avif"
+      }
+    },
+    "endColor": "#473244"
+  },
+  "footer": {
+    "name": "footer",
+    "desktop": {
+      "frameCount": 120,
+      "width": 1280,
+      "height": 720,
+      "fps": 24,
+      "dir": "/frames/footer/desktop",
+      "poster": {
+        "webp": "/frames/footer/desktop/poster.webp",
+        "avif": "/frames/footer/desktop/poster.avif"
+      }
+    },
+    "mobile": {
+      "frameCount": 72,
+      "width": 640,
+      "height": 1137,
+      "fps": 24,
+      "dir": "/frames/footer/mobile",
+      "poster": {
+        "webp": "/frames/footer/mobile/poster.webp",
+        "avif": "/frames/footer/mobile/poster.avif"
+      }
+    },
+    "endColor": "#865d4d"
+  }
+}
