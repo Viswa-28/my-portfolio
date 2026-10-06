@@ -4,10 +4,9 @@ import Reveal from './Reveal'
 import SplitText from './SplitText'
 import LogoLoop, { type LogoItem } from './LogoLoop'
 import { techLogos } from '../data/techLogos'
-import { prefersReducedMotion } from '../lib/reducedMotion'
+import { useReducedMotion } from '../lib/reducedMotion'
 import { staggerContainer, staggerItem } from '../lib/motion'
 
-const reduce = prefersReducedMotion
 
 const capabilities: { title: string; detail: string }[] = [
   {
@@ -62,6 +61,8 @@ function renderSkill(item: LogoItem) {
 }
 
 function Capabilities({ index }: { index: string }) {
+  const reduce = useReducedMotion()
+
   return (
     <section
       id="about"

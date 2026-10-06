@@ -1,6 +1,6 @@
 import { useRef, useState, type ReactNode } from 'react'
 import { motion } from 'motion/react'
-import { prefersReducedMotion } from '../lib/reducedMotion'
+import { useReducedMotion } from '../lib/reducedMotion'
 
 type MagnetProps = {
   children: ReactNode
@@ -8,12 +8,12 @@ type MagnetProps = {
   className?: string
 }
 
-const reduce = prefersReducedMotion
 
 // Subtly pulls its content toward the cursor while hovered, springing back on
 // leave. Touch devices never fire pointermove, so they get the static element;
 // reduced-motion users are opted out explicitly.
 function Magnet({ children, strength = 0.25, className }: MagnetProps) {
+  const reduce = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
   const [offset, setOffset] = useState({ x: 0, y: 0 })
 

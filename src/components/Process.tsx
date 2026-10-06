@@ -1,10 +1,9 @@
 import { motion } from 'motion/react'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
-import { prefersReducedMotion } from '../lib/reducedMotion'
+import { useReducedMotion } from '../lib/reducedMotion'
 import { staggerContainer, staggerItem } from '../lib/motion'
 
-const reduce = prefersReducedMotion
 
 const steps: { id: string; title: string; detail: string }[] = [
   {
@@ -35,6 +34,8 @@ const steps: { id: string; title: string; detail: string }[] = [
 ]
 
 function Process({ index }: { index: string }) {
+  const reduce = useReducedMotion()
+
   return (
     <section
       id="process"

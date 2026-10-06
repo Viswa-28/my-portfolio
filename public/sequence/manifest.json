@@ -1,0 +1,13 @@
+{
+  "frames": 90,
+  "frameWidth": 360,
+  "frameHeight": 576,
+  "cols": 6,
+  "rows": 5,
+  "perSheet": 30,
+  "sheets": [
+    "/sequence/turn-0.webp",
+    "/sequence/turn-1.webp",
+    "/sequence/turn-2.webp"
+  ]
+}

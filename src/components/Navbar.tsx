@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { motion } from 'motion/react'
 import Logo from './Logo'
-import { prefersReducedMotion } from '../lib/reducedMotion'
+import { useReducedMotion } from '../lib/reducedMotion'
 import { EASE } from '../lib/motion'
 
 const links = [
@@ -16,13 +16,13 @@ const links = [
 
 const SECTION_IDS = links.map((l) => l.href.slice(1))
 
-const reduce = prefersReducedMotion
 
 function Navbar() {
   // Every nav target is a section of the home page. On a service route a bare
   // "#about" points at nothing, so it has to become "/#about" — but using
   // that form on the home page would trigger a full reload instead of a
   // smooth scroll, so the prefix is conditional.
+  const reduce = useReducedMotion()
   const { pathname } = useLocation()
   const isHome = pathname === '/'
   const hrefFor = (hash: string) => (isHome ? hash : `/${hash}`)

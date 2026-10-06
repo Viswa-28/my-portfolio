@@ -4,12 +4,12 @@ import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
 import CountUp from './CountUp'
 import { ALL, categories, projects, workStats } from '../data/projects'
-import { prefersReducedMotion } from '../lib/reducedMotion'
+import { useReducedMotion } from '../lib/reducedMotion'
 import { EASE } from '../lib/motion'
 
-const reduce = prefersReducedMotion
 
 function Work({ index }: { index: string }) {
+  const reduce = useReducedMotion()
   const [filter, setFilter] = useState(ALL)
   const shown =
     filter === ALL

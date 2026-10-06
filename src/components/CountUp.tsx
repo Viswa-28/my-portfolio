@@ -15,10 +15,19 @@ const reduce = prefersReducedMotion
 function CountUp({ end, suffix = '', duration = 1.5 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.5 })
-  const [value, setValue] = useState(reduce ? end : 0)
+  // Always starts at 0, including for reduced-motion users. Seeding it with
+  // `end` instead made the first client render disagree with the prerendered
+  // HTML (which has no matchMedia and so always takes the non-reduced path),
+  // and React threw a hydration mismatch. The effect below jumps straight to
+  // the final value after mount, so nobody sees a 0 they shouldn't.
+  const [value, setValue] = useState(0)
 
   useEffect(() => {
-    if (reduce || !inView) return
+    if (reduce) {
+      setValue(end)
+      return
+    }
+    if (!inView) return
     let raf = 0
     let startTime = 0
     const step = (time: number) => {

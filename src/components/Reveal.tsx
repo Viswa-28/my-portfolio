@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import type { ReactNode } from 'react'
-import { prefersReducedMotion } from '../lib/reducedMotion'
+import { useReducedMotion } from '../lib/reducedMotion'
 import { revealVariants } from '../lib/motion'
 
 type RevealProps = {
@@ -11,7 +11,9 @@ type RevealProps = {
 // Fades + slides content up the first time it scrolls into view.
 // Reduced-motion users get the plain content, rendered immediately.
 function Reveal({ children, className }: RevealProps) {
-  if (prefersReducedMotion) {
+  const reduce = useReducedMotion()
+
+  if (reduce) {
     return <div className={className}>{children}</div>
   }
 

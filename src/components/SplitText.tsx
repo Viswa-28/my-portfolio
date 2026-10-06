@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { motion } from 'motion/react'
-import { prefersReducedMotion } from '../lib/reducedMotion'
+import { useReducedMotion } from '../lib/reducedMotion'
 import { splitContainer, splitItem } from '../lib/motion'
 
 type Tag = 'h1' | 'h3' | 'p' | 'span'
@@ -18,7 +18,6 @@ type SplitTextProps = {
   highlight?: string
 }
 
-const reduce = prefersReducedMotion
 
 // Reveals text token-by-token (chars or words), staggered, using transform +
 // opacity only. The full string stays in an aria-label and the split tokens
@@ -37,6 +36,7 @@ function SplitText({
   trigger = 'load',
   highlight,
 }: SplitTextProps) {
+  const reduce = useReducedMotion()
   const tokens = by === 'char' ? Array.from(text) : text.split(' ')
 
   const spanClass = (token: string) =>

@@ -1,10 +1,9 @@
 import { motion } from 'motion/react'
 import SectionHeading from './SectionHeading'
 import Reveal from './Reveal'
-import { prefersReducedMotion } from '../lib/reducedMotion'
+import { useReducedMotion } from '../lib/reducedMotion'
 import { staggerContainer, staggerItem } from '../lib/motion'
 
-const reduce = prefersReducedMotion
 
 type Service = {
   id: string
@@ -61,6 +60,8 @@ const services: Service[] = [
 ]
 
 function Services({ index }: { index: string }) {
+  const reduce = useReducedMotion()
+
   return (
     <section
       id="services"

@@ -81,6 +81,43 @@
   }
 }
 
+/* Scroll-scrubbed founder sequence.
+   `screen` is doing the heavy lifting: the source plate is a dark portrait on
+   near-black, and screen leaves the backdrop untouched wherever the source is
+   black — so the rectangular plate disappears and only the lit parts of the
+   figure composite onto the canvas. No alpha channel needed, which is why the
+   whole sequence is 0.41 MB.
+   The mask then fades the left and bottom edges so the figure dissolves out
+   behind the headline column and the spine instead of ending at a hard line. */
+.scroll-sequence.is-ready {
+  opacity: 1;
+}
+
+.scroll-sequence {
+  mix-blend-mode: screen;
+  -webkit-mask-image:
+    linear-gradient(to left, #000 42%, transparent 88%),
+    linear-gradient(to top, transparent 2%, #000 26%);
+  mask-image:
+    linear-gradient(to left, #000 42%, transparent 88%),
+    linear-gradient(to top, transparent 2%, #000 26%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+@media (max-width: 1023px) {
+  /* Stacked layout: the figure sits behind centred copy, so it fades from
+     the top instead of the side and sits further back. */
+  .scroll-sequence.is-ready {
+    opacity: 0.45;
+  }
+
+  .scroll-sequence {
+    -webkit-mask-image: linear-gradient(to top, transparent 4%, #000 34%);
+    mask-image: linear-gradient(to top, transparent 4%, #000 34%);
+  }
+}
+
 /* Soft indigo wash behind hero / CTA panels. Decorative only.
    Deliberately fainter than the amber it replaces: a saturated purple bloom
    at the old 0.1 opacity is the single biggest "AI landing page" tell. */

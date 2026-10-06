@@ -1,9 +1,9 @@
 import { motion } from 'motion/react'
 import SplitText from './SplitText'
-import { prefersReducedMotion } from '../lib/reducedMotion'
+import ScrollSequence from './ScrollSequence'
+import { useReducedMotion } from '../lib/reducedMotion'
 import { EASE, staggerContainer, staggerItem } from '../lib/motion'
 
-const reduce = prefersReducedMotion
 
 // The studio's own tagline, promoted from footer decoration to the structural
 // spine of the first screen. An agency is bought on method, so the three
@@ -29,26 +29,37 @@ const spine: { step: string; title: string; detail: string }[] = [
   },
 ]
 
-// Block-level fade+rise, sequenced after the split-text reveals. Empty props
-// for reduced-motion users so content shows immediately.
-const rise = (delay: number) =>
-  reduce
-    ? {}
-    : {
-        initial: { opacity: 0, y: 14 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.5, delay, ease: EASE },
-      }
-
 function Hero() {
+  const reduce = useReducedMotion()
+
+  // Block-level fade+rise, sequenced after the split-text reveals. Empty props
+  // for reduced-motion users so content shows immediately. Defined in the body
+  // rather than at module scope so it reads the hook's post-hydration value.
+  const rise = (delay: number) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, y: 14 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.5, delay, ease: EASE },
+        }
+
   return (
     <section
       id="hero"
       // 4.3rem is the sticky navbar (py-3 + a 2.75rem control + 1px border).
       // Subtracting it makes the hero exactly one screen tall, so the spine
       // lands on the fold instead of just under it.
-      className="relative isolate flex min-h-[calc(100svh-4.3rem)] scroll-mt-24 flex-col overflow-hidden px-6 lg:px-12"
+      // bg-background is load-bearing, not decoration: `isolate` makes this a
+      // stacking context, and the sequence canvas inside it uses mix-blend-mode
+      // screen. Without an opaque backdrop *inside* the context there is
+      // nothing to blend against and the blend silently does nothing.
+      className="relative isolate flex min-h-[calc(100svh-4.3rem)] scroll-mt-24 flex-col overflow-hidden bg-background px-6 lg:px-12"
     >
+      {/* Scroll-scrubbed founder sequence. Sits behind the copy, anchored
+          right on wide screens so the headline column stays clear. */}
+      <ScrollSequence targetId="hero" />
+
       {/* Ambient indigo wash. Decorative, sits behind everything. */}
       <div
         aria-hidden="true"
