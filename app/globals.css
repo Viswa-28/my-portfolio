@@ -139,6 +139,24 @@
   }
 }
 
+/* Hide the default disclosure triangle in Safari. */
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Industries marquee: two copies of the list, slid by half the track. */
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /*
  * Scroll reveal. Elements are only hidden once JS has confirmed it can
  * reveal them (RevealObserver adds .js-reveal to <html>), so the page

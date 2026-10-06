@@ -34,6 +34,36 @@ export function CheckIcon({ className = 'size-4' }: IconProps) {
   )
 }
 
+/** Path data for 24×24 line icons, keyed by the names used in /content. */
+const LINE_ICONS = {
+  // Services
+  website: 'M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm4 15h2',
+  seo: 'M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm10.5 3-5.2-5.2M7.5 10.5l2 2 3.5-4',
+  automation: 'M13 2 4 14h7l-1 8 9-12h-7l1-8Z',
+  growth: 'M3 17l6-6 4 4 8-8M21 7v5m0-5h-5',
+  // Problems
+  search: 'M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm10.5 3-5.2-5.2M8 8l5 5m0-5-5 5',
+  broken: 'M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6Zm0 3h18M10 13l-2 3h3l-2 3m6-6 2 2',
+  chat: 'M4 5h16v11H9l-5 4V5Zm5 5h.01M12 10h.01M15 10h.01',
+  // Contact
+  phone: 'M5 4h3.5l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2 4.5 1.5V19a2 2 0 0 1-2 2A17 17 0 0 1 3 6a2 2 0 0 1 2-2Z',
+  mail: 'M3 6h18v12H3V6Zm0 0 9 7 9-7',
+  pin: 'M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Zm0-9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z',
+  clock: 'M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Zm0-13v4l3 2',
+  instagram: 'M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm5 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm5.5-9.5h.01',
+  external: 'M7 17 17 7M9 7h8v8',
+} as const
+
+export type IconName = keyof typeof LINE_ICONS
+
+export function Icon({ name, className = 'size-6' }: IconProps & { name: IconName }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={LINE_ICONS[name]} />
+    </svg>
+  )
+}
+
 /** Hand-drawn style arrow used to point at CTAs. Draws left → right, curving down. */
 export function SquiggleArrow({ className = 'w-20' }: IconProps) {
   return (

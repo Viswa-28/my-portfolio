@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import WhatsAppFab from '@/components/WhatsAppFab'
 import Analytics from '@/components/Analytics'
 import RevealObserver from '@/components/RevealObserver'
+import Footer from '@/components/sections/Footer'
 import './globals.css'
 
 // next/font self-hosts both fonts (no request to Google at runtime) and
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <Navbar />
         <main id="main">{children}</main>
+        <Footer />
         <WhatsAppFab />
         <Analytics />
         <RevealObserver />
