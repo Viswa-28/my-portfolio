@@ -25,8 +25,7 @@ export default function Navbar() {
     const panel = panelRef.current
     if (!panel) return
 
-    const focusables = () =>
-      Array.from(panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'))
+    const focusables = () => Array.from(panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'))
     focusables()[0]?.focus()
     document.body.style.overflow = 'hidden'
 
@@ -53,50 +52,54 @@ export default function Navbar() {
   }, [open, close])
 
   return (
-    <header className="sticky top-0 z-40 border-b-2 border-ink bg-paper/95 backdrop-blur">
-      <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <a href="/" aria-label="Luno Lab home" className="rounded-lg">
-          <Logo />
-        </a>
-
-        {/* Desktop links */}
-        <div className="hidden items-center gap-7 md:flex">
-          <ul className="flex gap-6 font-semibold">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <a href={item.href} className="underline-offset-4 hover:underline">
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <a
-            href={whatsappLink()}
-            target="_blank"
-            rel="noopener"
-            data-track="whatsapp_click"
-            data-track-location="navbar"
-            className="btn btn-primary min-h-11 py-2 text-sm"
-          >
-            {site.navCta}
+    <>
+      <header className="sticky top-0 z-40 border-b-2 border-ink bg-paper/95 backdrop-blur">
+        <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <a href="/" className="rounded-lg">
+            <Logo />
           </a>
-        </div>
 
-        {/* Mobile toggle */}
-        <button
-          ref={toggleRef}
-          type="button"
-          onClick={() => setOpen(true)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label="Open menu"
-          className="grid size-12 place-items-center rounded-xl border-2 border-ink bg-white shadow-hard-sm md:hidden"
-        >
-          <MenuIcon />
-        </button>
-      </nav>
+          {/* Desktop links */}
+          <div className="hidden items-center gap-7 md:flex">
+            <ul className="flex gap-6 font-semibold">
+              {nav.map((item) => (
+                <li key={item.href}>
+                  <a href={item.href} className="underline-offset-4 hover:underline">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener"
+              data-track="whatsapp_click"
+              data-track-location="navbar"
+              className="btn btn-primary min-h-11 py-2 text-sm"
+            >
+              {site.navCta}
+            </a>
+          </div>
 
-      {/* Mobile menu */}
+          {/* Mobile toggle */}
+          <button
+            ref={toggleRef}
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label="Open menu"
+            className="grid size-12 place-items-center rounded-xl border-2 border-ink bg-white shadow-hard-sm md:hidden"
+          >
+            <MenuIcon />
+          </button>
+        </nav>
+      </header>
+
+      {/* Mobile menu. Rendered outside <header> on purpose: the header's
+          backdrop-filter makes it the containing block for fixed children,
+          which would clip this full-screen panel to the header's height. */}
       {open && (
         <div
           ref={panelRef}
@@ -143,6 +146,6 @@ export default function Navbar() {
           </a>
         </div>
       )}
-    </header>
+    </>
   )
 }
