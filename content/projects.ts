@@ -59,13 +59,16 @@ export const projects: Project[] = [
     slug: 'tevhr',
     name: 'TEVHR Solutions',
     url: 'https://tevhrsolutions.in',
-    // TODO: confirm industry and city.
-    industry: 'HR & consulting',
-    city: 'Tamil Nadu',
-    // TODO: write the one-line challenge.
-    challenge: 'TODO: one line about the problem this client had.',
-    // TODO: list 3–4 things we built.
-    built: ['TODO: feature 1', 'TODO: feature 2', 'TODO: feature 3'],
+    industry: 'Recruitment',
+    city: 'Madurai',
+    challenge:
+      'A recruitment company hiring bike delivery drivers needed to look trustworthy to the businesses it supplies and to the riders it hires.',
+    built: [
+      'Clear service cards: hiring, payroll & training',
+      'Client showcase page',
+      'About, contact & privacy policy pages',
+      'Mobile-friendly design',
+    ],
     result: '',
   },
 ]

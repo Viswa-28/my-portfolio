@@ -2,7 +2,6 @@
  * Site-wide settings: brand, contact details, navigation and SEO.
  * Everything a non-developer may need to edit lives in /content.
  *
- * PLACEHOLDERS to fill: search this folder for "<" and "TODO".
  */
 
 export const site = {
@@ -18,7 +17,8 @@ export const site = {
   // WhatsApp number: country code + number, digits only.
   whatsapp: '916382825422',
   email: 'viswaa288@gmail.com',
-  address: '<ADDRESS>, Madurai, Tamil Nadu',
+  // City-level only; add a street address here if you want one shown.
+  address: 'Madurai, Tamil Nadu',
   hours: 'Mon–Sat, 9:30 AM – 7:00 PM',
   instagram: 'https://www.instagram.com/luno_lab_/',
 
