@@ -2,7 +2,7 @@
  * Site-wide settings: brand, contact details, navigation and SEO.
  * Everything a non-developer may need to edit lives in /content.
  *
- * PLACEHOLDERS to fill: search this folder for "<" and "₹____".
+ * PLACEHOLDERS to fill: search this folder for "<" and "TODO".
  */
 
 export const site = {

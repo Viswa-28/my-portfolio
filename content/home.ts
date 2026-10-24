@@ -65,12 +65,6 @@ export const services = {
       body: 'We set up your pages so Google understands your business and the areas you serve.',
     },
     {
-      icon: 'automation',
-      name: 'Automation',
-      title: 'Auto WhatsApp replies, booking & enquiry forms',
-      body: 'Enquiries reach you instantly, and customers get a reply even when you are busy.',
-    },
-    {
       icon: 'growth',
       name: 'Digital Growth',
       title: 'Google Business Profile, ads & social to grow your reach',
@@ -119,7 +113,7 @@ export const faq = {
   items: [
     {
       q: 'How much does a website cost?',
-      a: 'Our websites start from ₹____. The final price depends on how many pages and features you need. See our packages above, or WhatsApp us for a free plan and quote.',
+      a: 'Our websites start from ₹7,999. The final price depends on how many pages and features you need. See our packages above, or WhatsApp us for a free plan and quote.',
     },
     {
       q: 'How long does it take?',

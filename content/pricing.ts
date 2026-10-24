@@ -1,11 +1,13 @@
 /**
- * Packages. Replace every ₹____ with your real starting price.
+ * Packages. Prices are one-time; `monthly` adds an ongoing fee line.
  * Each "Get this plan" button opens WhatsApp with the plan name pre-filled.
  */
 
 export type Plan = {
   name: string
   price: string
+  /** Optional recurring fee, shown under the one-time price. */
+  monthly?: string
   tagline: string
   features: string[]
   popular?: boolean
@@ -14,13 +16,13 @@ export type Plan = {
 export const plans: Plan[] = [
   {
     name: 'Starter',
-    price: '₹____',
+    price: '₹7,999',
     tagline: 'Get online fast with a simple, professional page.',
     features: ['1-page website', 'WhatsApp button', 'Google Maps location', 'Mobile-ready design'],
   },
   {
     name: 'Business',
-    price: '₹____',
+    price: '₹14,999',
     tagline: 'The full package most local businesses need.',
     features: [
       'Up to 5 pages',
@@ -33,13 +35,9 @@ export const plans: Plan[] = [
   },
   {
     name: 'Growth',
-    price: '₹____',
+    price: '₹24,999',
+    monthly: '₹3,999',
     tagline: 'For businesses ready to grow every month.',
-    features: [
-      'Everything in Business',
-      'WhatsApp & enquiry automation',
-      'Monthly SEO',
-      'Ads & social media support',
-    ],
+    features: ['Everything in Business', 'Monthly SEO', 'Ads & social media support'],
   },
 ]

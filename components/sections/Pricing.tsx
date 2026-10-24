@@ -27,6 +27,13 @@ export default function Pricing() {
             <p className="mt-6">
               <span className="block text-sm font-semibold text-ink-soft">Starting from</span>
               <span className="font-heading text-4xl font-extrabold">{plan.price}</span>
+              <span className="ml-1.5 text-sm font-semibold text-ink-soft">one-time</span>
+              {plan.monthly && (
+                <span className="mt-1 block font-bold">
+                  + {plan.monthly}
+                  <span className="text-sm font-semibold text-ink-soft">/month</span>
+                </span>
+              )}
             </p>
 
             <ul className="mt-6 flex flex-col gap-3">

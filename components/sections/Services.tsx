@@ -11,9 +11,9 @@ export default function Services() {
     <Section id="services" labelledBy="services-title" className="bg-white/60">
       <SectionHeading id="services-title" eyebrow={services.eyebrow} title={services.h2} />
 
-      <ul className="mt-12 grid gap-6 sm:grid-cols-2">
+      <ul className="mt-12 grid gap-6 md:grid-cols-3">
         {services.items.map((s, i) => (
-          <li key={s.name} className="card flex flex-col p-6 sm:p-8" data-reveal style={{ transitionDelay: `${(i % 2) * 80}ms` }}>
+          <li key={s.name} className="card flex flex-col p-6 sm:p-8" data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
             <span className={`grid size-14 place-items-center rounded-2xl border-2 border-ink shadow-hard-sm ${ACCENTS[i % ACCENTS.length]}`}>
               <Icon name={s.icon} className="size-7" />
             </span>
